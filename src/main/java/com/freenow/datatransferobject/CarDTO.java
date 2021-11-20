@@ -5,23 +5,33 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.freenow.domainvalue.EngineType;
 import com.freenow.domainvalue.Manufacturer;
 
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class CarDTO {
 
+    @JsonIgnore
     private Long id;
 
+    @NotNull(message = "License plate can not be null!")
     private String licensePlate;
 
+    @NotNull(message = "Seat count can not be null!")
+    @Min(value = 1)
     private Integer seatCount;
 
     private Boolean convertible;
 
+    @NotNull(message = "Model can not be null!")
     private String model;
 
     private Double rating;
 
+    @NotNull(message = "Engine type can not be null!")
     private EngineType engineType;
 
+    @NotNull(message = "Manufacturer can not be null!")
     private Manufacturer manufacturer;
 
     private CarDTO() {
@@ -84,14 +94,20 @@ public class CarDTO {
 
     public static class CarDTOBuilder {
 
-        @JsonIgnore
         private Long id;
+
         private String licensePlate;
+
         private Integer seatCount;
+
         private Boolean convertible;
+
         private String model;
+
         private Double rating;
+
         private EngineType engineType;
+
         private Manufacturer manufacturer;
 
         public Long getId() {

@@ -30,7 +30,7 @@ public class CarDO {
     private Integer seatCount;
 
     @Column(nullable = false)
-    private Boolean convertible;
+    private Boolean convertible = false;
 
     @Column(nullable = false)
     private String model;

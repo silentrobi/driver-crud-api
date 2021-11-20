@@ -15,7 +15,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @EnableSwagger2
 @SpringBootApplication
-public class FreeNowServerApplicantTestApplication implements WebMvcConfigurer
+public class FreeNowServerApplicantTestApplication
 {
 
     public static void main(String[] args)
@@ -24,11 +24,11 @@ public class FreeNowServerApplicantTestApplication implements WebMvcConfigurer
     }
 
 
-    @Override
-    public void addInterceptors(InterceptorRegistry registry)
-    {
-        registry.addInterceptor(new LoggingInterceptor()).addPathPatterns("/**");
-    }
+//    @Override
+//    public void addInterceptors(InterceptorRegistry registry)
+//    {
+//        registry.addInterceptor(new LoggingInterceptor()).addPathPatterns("/**");
+//    }
 
 
     @Bean
