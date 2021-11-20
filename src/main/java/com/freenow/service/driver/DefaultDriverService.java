@@ -25,7 +25,6 @@ public class DefaultDriverService implements DriverService
 
     private final DriverRepository driverRepository;
 
-
     public DefaultDriverService(final DriverRepository driverRepository)
     {
         this.driverRepository = driverRepository;

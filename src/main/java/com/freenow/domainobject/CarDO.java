@@ -11,7 +11,10 @@ import javax.validation.constraints.NotNull;
 import java.time.ZonedDateTime;
 
 @Entity
-@Table(name = "car")
+@Table(
+        name = "car",
+        uniqueConstraints = @UniqueConstraint(name = "uc_license_plate", columnNames = {"licensePlate"})
+)
 public class CarDO {
 
     @Id
@@ -28,6 +31,9 @@ public class CarDO {
 
     @Column(nullable = false)
     private Boolean convertible;
+
+    @Column(nullable = false)
+    private String model;
 
     @Column
     private Double rating;
@@ -46,6 +52,25 @@ public class CarDO {
 
     @Column(nullable = false)
     private Boolean deleted = false;
+
+    private CarDO(){}
+    public CarDO(String licensePlate,
+                 Integer seatCount,
+                 Boolean convertible,
+                 String model,
+                 Double rating,
+                 EngineType engineType,
+                 Manufacturer manufacturer)
+    {
+        this.licensePlate = licensePlate;
+        this.seatCount = seatCount;
+        this.convertible = convertible;
+        this.model = model;
+        this.rating = rating;
+        this.engineType = engineType;
+        this.manufacturer = manufacturer;
+    }
+
 
     public Long getId() {
         return id;
@@ -77,6 +102,14 @@ public class CarDO {
 
     public void setConvertible(Boolean convertible) {
         this.convertible = convertible;
+    }
+
+    public String getModel() {
+        return model;
+    }
+
+    public void setModel(String model) {
+        this.model = model;
     }
 
     public Double getRating() {
