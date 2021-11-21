@@ -12,7 +12,9 @@ import com.freenow.exception.ConstraintsViolationException;
 import com.freenow.exception.EntityNotFoundException;
 import com.freenow.service.driver.DriverService;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Predicate;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -93,7 +95,7 @@ public class DriverController {
     }
 
     @GetMapping("/search")
-    public List<DriverDO> findDrivers(QueryParams queryParams){
+    public List<DriverDO> findDrivers(QueryParams queryParams) {
 
 
 //            query = DriverSpecification.findByOnlineStatus(queryParams.getOnlineStatus());
@@ -101,6 +103,24 @@ public class DriverController {
 //DriverSpecification.findByOnlineStatus(queryParams.getOnlineStatus())
 //
 
-        return driverRepository.findAll(Specification.where(DriverSpecification.findByUsername(queryParams.getUsername()).and(DriverSpecification.findByOnlineStatus(queryParams.getOnlineStatus()))));
+//        return driverRepository.findAll(Specification.where(DriverSpecification.findByUsername(queryParams.getUsername())
+//                .and(DriverSpecification.findByOnlineStatus(queryParams.getOnlineStatus()))
+//                .and(DriverSpecification.findByLicensePlate(queryParams.getLicensePlate()))));
+
+        Specification spec = where(null);
+
+        if (queryParams.getLicensePlate() != null) {
+            spec = spec.and(DriverSpecification.findByLicensePlate(queryParams.getLicensePlate()));
+        }
+
+        if (queryParams.getUsername() != null) {
+            spec = spec.and(DriverSpecification.findByUsername(queryParams.getUsername()));
+        }
+        if (queryParams.getOnlineStatus() != null) {
+            spec = spec.and(DriverSpecification.findByOnlineStatus(queryParams.getOnlineStatus()));
+        }
+
+        List<DriverDO> x = driverRepository.findAll(spec);
+        return x;
     }
 }

@@ -18,6 +18,26 @@ import java.util.List;
 @Repository
 public class DriverSpecification {
 
+
+//    public static Specification<DriverDO> findDriverByFilter(QueryParams queryParams){
+//
+//        return ((root, criteriaQuery, criteriaBuilder) ->{
+//            List<Predicate> predicateList = new ArrayList<>();
+//            if(queryParams.getUsername() != null ){
+//                predicateList.add( criteriaBuilder.equal(root.get("username"), queryParams.getUsername()));
+//            }
+//            if(queryParams.getOnlineStatus() != null){
+//                predicateList.add(criteriaBuilder.equal(root.get("onlineStatus"), queryParams.getUsername()));
+//            }
+//            final Path<CarDO> brandPath = root.get("car");
+//            if(queryParams.getLicensePlate() != null){
+//                predicateList.add(criteriaBuilder.equal(brandPath.<String>get("licensePlate"), queryParams.getLicensePlate()));
+//            }
+//
+//            return criteriaBuilder.and(predicateList.toArray());
+//        });
+//    }
+
     public static Specification<DriverDO> findByUsername(String username){
         return ((root, criteriaQuery, criteriaBuilder) -> criteriaBuilder.equal(root.get("username"), username));
     }
@@ -28,7 +48,6 @@ public class DriverSpecification {
 
     public static Specification<DriverDO> findByLicensePlate(String licensePlate){
         return ((root, criteriaQuery, criteriaBuilder) -> {
-            Join<DriverDO, CarDO> joinParent = root.join("car");
             final Path<CarDO> brandPath = root.get("car");
             return criteriaBuilder.equal(brandPath.<String>get("licensePlate"), licensePlate);
         });
