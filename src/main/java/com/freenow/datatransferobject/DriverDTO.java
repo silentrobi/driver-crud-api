@@ -18,18 +18,19 @@ public class DriverDTO
 
     private GeoCoordinate coordinate;
 
+    private Long carId;
 
     private DriverDTO()
     {
     }
 
-
-    private DriverDTO(Long id, String username, String password, GeoCoordinate coordinate)
+    private DriverDTO(Long id, String username, String password, GeoCoordinate coordinate, Long carId)
     {
         this.id = id;
         this.username = username;
         this.password = password;
         this.coordinate = coordinate;
+        this.carId = carId;
     }
 
 
@@ -63,6 +64,9 @@ public class DriverDTO
         return coordinate;
     }
 
+    public Long getCarId(){
+        return carId;
+    }
 
     public static class DriverDTOBuilder
     {
@@ -70,7 +74,7 @@ public class DriverDTO
         private String username;
         private String password;
         private GeoCoordinate coordinate;
-
+        private Long carId;
 
         public DriverDTOBuilder setId(Long id)
         {
@@ -99,10 +103,18 @@ public class DriverDTO
             return this;
         }
 
+        public Long getCarId() {
+            return carId;
+        }
+
+        public DriverDTOBuilder setCarId(Long carId) {
+            this.carId = carId;
+            return this;
+        }
 
         public DriverDTO createDriverDTO()
         {
-            return new DriverDTO(id, username, password, coordinate);
+            return new DriverDTO(id, username, password, coordinate, carId);
         }
 
     }

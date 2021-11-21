@@ -5,6 +5,7 @@ import com.freenow.controller.mapper.CarMapper;
 import com.freenow.controller.mapper.DriverMapper;
 import com.freenow.datatransferobject.CarDTO;
 import com.freenow.datatransferobject.DriverDTO;
+import com.freenow.datatransferobject.UpdateCarDTO;
 import com.freenow.domainobject.CarDO;
 import com.freenow.domainobject.DriverDO;
 import com.freenow.exception.ConstraintsViolationException;
@@ -27,7 +28,6 @@ import java.util.List;
 public class CarController {
 
     private final CarService carService;
-
 
     @Autowired
     public CarController(final CarService carService)
@@ -55,5 +55,16 @@ public class CarController {
         return CarMapper.makeCarDTO(carService.create(carDO));
     }
 
+    @PutMapping("/{carId}")
+    public void updateCar(@PathVariable long carId, @Valid @RequestBody UpdateCarDTO updateCarDTO) throws EntityNotFoundException, ConstraintsViolationException
+    {
+        carService.update(carId, updateCarDTO);
+    }
 
+
+    @DeleteMapping("/{carId}")
+    public void deleteCar(@PathVariable long carId) throws EntityNotFoundException
+    {
+        carService.delete(carId);
+    }
 }

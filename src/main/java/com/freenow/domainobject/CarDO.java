@@ -53,7 +53,11 @@ public class CarDO {
     @Column(nullable = false)
     private Boolean deleted = false;
 
+    @OneToOne(mappedBy = "car")
+    private DriverDO driver;
+
     private CarDO(){}
+
     public CarDO(String licensePlate,
                  Integer seatCount,
                  Boolean convertible,

@@ -1,6 +1,5 @@
 package com.freenow.datatransferobject;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.freenow.domainvalue.EngineType;
 import com.freenow.domainvalue.Manufacturer;
@@ -11,7 +10,6 @@ import javax.validation.constraints.NotNull;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class CarDTO {
 
-    @JsonIgnore
     private Long id;
 
     @NotNull(message = "License plate can not be null!")
@@ -33,6 +31,8 @@ public class CarDTO {
 
     @NotNull(message = "Manufacturer can not be null!")
     private Manufacturer manufacturer;
+
+    private Long carId;
 
     private CarDTO() {
     }
@@ -90,6 +90,10 @@ public class CarDTO {
 
     public Manufacturer getManufacturer() {
         return manufacturer;
+    }
+
+    public Long getCarId() {
+        return carId;
     }
 
     public static class CarDTOBuilder {
@@ -177,7 +181,7 @@ public class CarDTO {
             return this;
         }
 
-        public CarDTO.CarDTOBuilder setId(Long id) {
+        public CarDTOBuilder setId(Long id) {
             this.id = id;
             return this;
         }

@@ -2,6 +2,17 @@
  * CREATE Script for init of DB
  */
 
+--- Create 3 cars
+
+insert into car (id, license_plate, seat_count, convertible, model, rating, engine_type, manufacturer, date_created, deleted)
+values (1, '14AAC630', 5, false, '2003', 8.2, 'DIESEL', 'BMW', now(), false);
+
+insert into car (id, license_plate, seat_count, convertible, model, rating, engine_type, manufacturer, date_created, deleted)
+values (2, '15ACF680', 5, false, '2006', 7.2, 'GAS', 'TOYOTA', now(), false);
+
+insert into car (id, license_plate, seat_count, convertible, model, rating, engine_type, manufacturer, date_created, deleted)
+values (3, '14CAE631', 5, false, '2009', 8.8, 'ELECTRIC', 'FORD', now(), false);
+
 -- Create 3 OFFLINE drivers
 
 insert into driver (id, date_created, deleted, online_status, password, username) values (1, now(), false, 'OFFLINE',
@@ -41,13 +52,3 @@ values
  'aced0005737200226f72672e737072696e676672616d65776f726b2e646174612e67656f2e506f696e7431b9e90ef11a4006020002440001784400017978704023000000000000404bfa1cac083127', now(), now(), false, 'ONLINE',
 'driver08pw', 'driver08');
 
---- Create 3 cars
-
-insert into car (id, license_plate, seat_count, convertible, model, rating, engine_type, manufacturer, date_created, deleted)
-values (1, '14AAC630', 5, false, '2003', 8.2, 'DIESEL', 'BMW', now(), false);
-
-insert into car (id, license_plate, seat_count, convertible, model, rating, engine_type, manufacturer, date_created, deleted)
-values (2, '15ACF680', 5, false, '2006', 7.2, 'GAS', 'TOYOTA', now(), false);
-
-insert into car (id, license_plate, seat_count, convertible, model, rating, engine_type, manufacturer, date_created, deleted)
-values (3, '14CAE631', 5, false, '2009', 8.8, 'ELECTRIC', 'FORD', now(), false);

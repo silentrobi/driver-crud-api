@@ -1,6 +1,8 @@
 package com.freenow.service.car;
 
 import com.freenow.dataaccessobject.CarRepository;
+import com.freenow.datatransferobject.CarDTO;
+import com.freenow.datatransferobject.UpdateCarDTO;
 import com.freenow.domainobject.CarDO;
 import com.freenow.domainobject.DriverDO;
 import com.freenow.domainvalue.GeoCoordinate;
@@ -76,8 +78,12 @@ public class DefaultCarService implements CarService{
 
     @Override
     @Transactional
-    public CarDO update(CarDO carDO) throws ConstraintsViolationException {
-        return null;
+    public void update(Long carId, UpdateCarDTO updateCarDTO) throws ConstraintsViolationException, EntityNotFoundException {
+        CarDO carDO = findCarChecked(carId);
+
+        carDO.setLicensePlate(updateCarDTO.getLicensePlate());
+        carDO.setEngineType(updateCarDTO.getEngineType());
+        carDO.setRating(updateCarDTO.getRating());
     }
 
     /**

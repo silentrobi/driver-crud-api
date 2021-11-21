@@ -1,6 +1,7 @@
 package com.freenow.controller.mapper;
 
 import com.freenow.datatransferobject.CarDTO;
+import com.freenow.datatransferobject.UpdateCarDTO;
 import com.freenow.domainobject.CarDO;
 
 import java.util.Collection;

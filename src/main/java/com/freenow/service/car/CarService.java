@@ -1,5 +1,7 @@
 package com.freenow.service.car;
 
+import com.freenow.datatransferobject.CarDTO;
+import com.freenow.datatransferobject.UpdateCarDTO;
 import com.freenow.domainobject.CarDO;
 import com.freenow.exception.ConstraintsViolationException;
 import com.freenow.exception.EntityNotFoundException;
@@ -14,7 +16,7 @@ public interface CarService {
 
     CarDO create(CarDO carDO) throws ConstraintsViolationException;
 
-    CarDO update(CarDO carDO) throws ConstraintsViolationException;
+    void update(Long carId, UpdateCarDTO updateCarDTO) throws ConstraintsViolationException, EntityNotFoundException;
 
     void delete(Long carId) throws EntityNotFoundException;
 }
