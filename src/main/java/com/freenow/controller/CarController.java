@@ -61,7 +61,6 @@ public class CarController {
         carService.update(carId, updateCarDTO);
     }
 
-
     @DeleteMapping("/{carId}")
     public void deleteCar(@PathVariable long carId) throws EntityNotFoundException
     {

@@ -24,17 +24,15 @@ public class DriverMapper {
         GeoCoordinate coordinate = driverDO.getCoordinate();
         CarDO car = driverDO.getCar();
 
-        //System.out.println(car.getId());
         if (coordinate != null) {
             driverDTOBuilder.setCoordinate(coordinate);
         }
         if(car != null){
-            driverDTOBuilder.setCarId(car.getId());
+            driverDTOBuilder.setCar(CarMapper.makeCarDTO(car));
         }
 
         return driverDTOBuilder.createDriverDTO();
     }
-
 
     public static List<DriverDTO> makeDriverDTOList(Collection<DriverDO> drivers) {
         List<DriverDTO> x =  drivers.stream()

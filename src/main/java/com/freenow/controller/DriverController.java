@@ -1,6 +1,9 @@
 package com.freenow.controller;
 
 import com.freenow.controller.mapper.DriverMapper;
+import com.freenow.controller.mapper.QueryParams;
+import com.freenow.dataaccessobject.DriverRepository;
+import com.freenow.dataaccessobject.specification.DriverSpecification;
 import com.freenow.datatransferobject.DriverDTO;
 import com.freenow.domainobject.DriverDO;
 import com.freenow.domainvalue.OnlineStatus;
@@ -13,6 +16,7 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,6 +29,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import static org.springframework.data.jpa.domain.Specification.where;
+
 /**
  * All operations with a driver will be routed by this controller.
  * <p/>
@@ -35,10 +41,12 @@ public class DriverController {
 
     private final DriverService driverService;
 
+    private final DriverRepository driverRepository;
 
     @Autowired
-    public DriverController(final DriverService driverService) {
+    public DriverController(final DriverService driverService, DriverRepository driverRepository) {
         this.driverService = driverService;
+        this.driverRepository = driverRepository;
     }
 
 
@@ -82,5 +90,17 @@ public class DriverController {
     @GetMapping
     public List<DriverDTO> findDrivers(@RequestParam OnlineStatus onlineStatus) {
         return DriverMapper.makeDriverDTOList(driverService.find(onlineStatus));
+    }
+
+    @GetMapping("/search")
+    public List<DriverDO> findDrivers(QueryParams queryParams){
+
+
+//            query = DriverSpecification.findByOnlineStatus(queryParams.getOnlineStatus());
+//            query = query.and(DriverSpecification.findByUsername(queryParams.getUsername()));
+//DriverSpecification.findByOnlineStatus(queryParams.getOnlineStatus())
+//
+
+        return driverRepository.findAll(Specification.where(DriverSpecification.findByUsername(queryParams.getUsername()).and(DriverSpecification.findByOnlineStatus(queryParams.getOnlineStatus()))));
     }
 }

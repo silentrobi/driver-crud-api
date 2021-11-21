@@ -112,7 +112,7 @@ public class DefaultDriverService implements DriverService {
         if (onlineDriverCount > 0) {
             throw new CarAlreadyInUseException("Car already in use.");
         }
-
+        
         driverDO.setCar(carDO);
     }
 
