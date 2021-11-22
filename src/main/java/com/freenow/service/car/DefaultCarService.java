@@ -83,13 +83,15 @@ public class DefaultCarService implements CarService {
      * @throws ConstraintsViolationException if a car already exists with the given licensePlate, ... .
      */
     @Override
-    @Transactional
     public void update(Long carId, UpdateCarDTO updateCarDTO) throws EntityNotFoundException, ConstraintsViolationException {
         CarDO carDO = findCarChecked(carId);
         try {
             carDO.setLicensePlate(updateCarDTO.getLicensePlate());
             carDO.setEngineType(updateCarDTO.getEngineType());
             carDO.setRating(updateCarDTO.getRating());
+
+            carRepository.save(carDO);
+
         } catch (DataIntegrityViolationException e) {
             LOG.warn("ConstraintsViolationException while updating a car: {}", updateCarDTO, e);
             throw new ConstraintsViolationException(e.getMessage());
