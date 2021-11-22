@@ -46,18 +46,15 @@ public class DriverDTO
         return id;
     }
 
-
     public String getUsername()
     {
         return username;
     }
 
-
     public String getPassword()
     {
         return password;
     }
-
 
     public GeoCoordinate getCoordinate()
     {

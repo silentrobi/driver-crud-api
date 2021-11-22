@@ -32,8 +32,6 @@ public class CarDTO {
     @NotNull(message = "Manufacturer can not be null!")
     private Manufacturer manufacturer;
 
-    private Long carId;
-
     private CarDTO() {
     }
 
@@ -90,10 +88,6 @@ public class CarDTO {
 
     public Manufacturer getManufacturer() {
         return manufacturer;
-    }
-
-    public Long getCarId() {
-        return carId;
     }
 
     public static class CarDTOBuilder {

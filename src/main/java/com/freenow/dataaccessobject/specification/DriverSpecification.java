@@ -17,7 +17,7 @@ public class DriverSpecification {
         return ((root, criteriaQuery, criteriaBuilder) ->{
             List<Predicate> predicateList = new ArrayList<>();
             if(queryParams.getUsername() != null ){
-                predicateList.add( criteriaBuilder.equal(root.get("username"), queryParams.getUsername()));
+                predicateList.add( criteriaBuilder.like(root.get("username"), queryParams.getUsername()));
             }
             if(queryParams.getOnlineStatus() != null){
                 predicateList.add(criteriaBuilder.equal(root.get("onlineStatus"), queryParams.getOnlineStatus()));
@@ -26,7 +26,7 @@ public class DriverSpecification {
             final Path<CarDO> brandPath = root.get("car");
 
             if(queryParams.getLicensePlate() != null){
-                predicateList.add(criteriaBuilder.equal(brandPath.<String>get("licensePlate"), queryParams.getLicensePlate()));
+                predicateList.add(criteriaBuilder.like(brandPath.<String>get("licensePlate"), queryParams.getLicensePlate()));
             }
             if(queryParams.getRating() != 0.0){
                 predicateList.add(criteriaBuilder.equal(brandPath.<String>get("rating"), queryParams.getRating()));
