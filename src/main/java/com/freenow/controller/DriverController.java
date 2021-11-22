@@ -3,12 +3,11 @@ package com.freenow.controller;
 import com.freenow.controller.mapper.DriverMapper;
 import com.freenow.controller.util.QueryParams;
 import com.freenow.dataaccessobject.DriverRepository;
-import com.freenow.dataaccessobject.specification.DriverSpecification;
 import com.freenow.datatransferobject.DriverDTO;
 import com.freenow.domainobject.DriverDO;
-import com.freenow.domainvalue.OnlineStatus;
 import com.freenow.exception.CarAlreadyInUseException;
 import com.freenow.exception.ConstraintsViolationException;
+import com.freenow.exception.DriverOfflineException;
 import com.freenow.exception.EntityNotFoundException;
 import com.freenow.service.driver.DriverService;
 
@@ -16,7 +15,6 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.domain.Specification;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,8 +26,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
-
-import static org.springframework.data.jpa.domain.Specification.where;
 
 /**
  * All operations with a driver will be routed by this controller.
@@ -49,12 +45,10 @@ public class DriverController {
         this.driverRepository = driverRepository;
     }
 
-
     @GetMapping("/{driverId}")
     public DriverDTO getDriver(@PathVariable long driverId) throws EntityNotFoundException {
         return DriverMapper.makeDriverDTO(driverService.find(driverId));
     }
-
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
@@ -63,12 +57,10 @@ public class DriverController {
         return DriverMapper.makeDriverDTO(driverService.create(driverDO));
     }
 
-
     @DeleteMapping("/{driverId}")
     public void deleteDriver(@PathVariable long driverId) throws EntityNotFoundException {
         driverService.delete(driverId);
     }
-
 
     @PutMapping("/{driverId}")
     public void updateLocation(
@@ -78,7 +70,7 @@ public class DriverController {
     }
 
     @PutMapping("/{driverId}/car/{carId}/select")
-    public void selectCar(@PathVariable long driverId, @PathVariable long carId) throws EntityNotFoundException, CarAlreadyInUseException {
+    public void selectCar(@PathVariable long driverId, @PathVariable long carId) throws EntityNotFoundException, DriverOfflineException, CarAlreadyInUseException {
         driverService.selectCar(driverId, carId);
     }
 

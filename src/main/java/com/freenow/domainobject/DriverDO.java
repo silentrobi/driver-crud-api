@@ -7,6 +7,8 @@ import java.time.ZonedDateTime;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
@@ -14,6 +16,7 @@ import org.springframework.format.annotation.DateTimeFormat;
         name = "driver",
         uniqueConstraints = @UniqueConstraint(name = "uc_username", columnNames = {"username"})
 )
+@Where(clause = "deleted=false")
 public class DriverDO {
 
     @Id

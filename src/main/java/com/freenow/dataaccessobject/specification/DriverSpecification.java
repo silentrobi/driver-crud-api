@@ -15,7 +15,6 @@ import java.util.List;
 @Repository
 public class DriverSpecification {
 
-
     public static Specification<DriverDO> findByQueryParams(QueryParams queryParams){
 
         return ((root, criteriaQuery, criteriaBuilder) ->{

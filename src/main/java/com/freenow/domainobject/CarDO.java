@@ -4,6 +4,7 @@ package com.freenow.domainobject;
 import com.freenow.domainvalue.EngineType;
 import com.freenow.domainvalue.Manufacturer;
 import com.freenow.domainvalue.OnlineStatus;
+import org.hibernate.annotations.Where;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -15,6 +16,7 @@ import java.time.ZonedDateTime;
         name = "car",
         uniqueConstraints = @UniqueConstraint(name = "uc_license_plate", columnNames = {"licensePlate"})
 )
+@Where(clause = "deleted=false")
 public class CarDO {
 
     @Id
