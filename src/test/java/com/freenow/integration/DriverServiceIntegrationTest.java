@@ -419,9 +419,9 @@ public class DriverServiceIntegrationTest {
 
         driverService.delete(driverDO1.getId());
 
-        DriverDO found = driverService.find(driverDO1.getId());  //
-
-        Assertions.assertEquals(null, found);
+        Assertions.assertThrows(EntityNotFoundException.class, () -> {
+            driverService.find(driverDO1.getId());
+        });
     }
 
 }
