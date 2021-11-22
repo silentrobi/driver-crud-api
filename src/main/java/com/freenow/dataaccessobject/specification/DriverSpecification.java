@@ -3,16 +3,13 @@ package com.freenow.dataaccessobject.specification;
 import com.freenow.controller.util.QueryParams;
 import com.freenow.domainobject.CarDO;
 import com.freenow.domainobject.DriverDO;
-import com.freenow.domainvalue.Manufacturer;
-import com.freenow.domainvalue.OnlineStatus;
+
 import org.springframework.data.jpa.domain.Specification;
-import org.springframework.stereotype.Repository;
 
 import javax.persistence.criteria.*;
 import java.util.ArrayList;
 import java.util.List;
 
-@Repository
 public class DriverSpecification {
 
     public static Specification<DriverDO> findByQueryParams(QueryParams queryParams){
