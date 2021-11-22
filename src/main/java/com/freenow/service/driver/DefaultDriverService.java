@@ -1,6 +1,8 @@
 package com.freenow.service.driver;
 
+import com.freenow.controller.util.QueryParams;
 import com.freenow.dataaccessobject.DriverRepository;
+import com.freenow.dataaccessobject.specification.DriverSpecification;
 import com.freenow.domainobject.CarDO;
 import com.freenow.domainobject.DriverDO;
 import com.freenow.domainvalue.GeoCoordinate;
@@ -15,6 +17,7 @@ import com.freenow.service.car.CarService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -122,21 +125,19 @@ public class DefaultDriverService implements DriverService {
         DriverDO driverDO = findDriverChecked(driverId);
         driverDO.setCar(null);
     }
-
+    
 
     /**
-     * Find all drivers by online state.
+     * Find all drivers by query params (username, online status, rating, manufacturer, and license plate).
      *
-     * @param onlineStatus
+     * @param queryParams
      */
-    @Override
-    public List<DriverDO> find(OnlineStatus onlineStatus) {
-        return driverRepository.findByOnlineStatus(onlineStatus);
+    public List<DriverDO> find(QueryParams queryParams){
+        return driverRepository.findAll(Specification.where(DriverSpecification.findByQueryParams(queryParams)));
     }
 
     private DriverDO findDriverChecked(Long driverId) throws EntityNotFoundException {
         return driverRepository.findById(driverId)
                 .orElseThrow(() -> new EntityNotFoundException("Could not find entity with id: " + driverId));
     }
-
 }

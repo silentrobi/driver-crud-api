@@ -1,5 +1,6 @@
 package com.freenow.service.driver;
 
+import com.freenow.controller.util.QueryParams;
 import com.freenow.domainobject.DriverDO;
 import com.freenow.domainvalue.OnlineStatus;
 import com.freenow.exception.CarAlreadyInUseException;
@@ -22,6 +23,5 @@ public interface DriverService
 
     void deselectCar(long driverId) throws EntityNotFoundException;
 
-    List<DriverDO> find(OnlineStatus onlineStatus);
-
+    List<DriverDO> find(QueryParams queryParams);
 }

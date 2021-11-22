@@ -1,4 +1,4 @@
-package com.freenow.controller.mapper;
+package com.freenow.controller.util;
 
 import com.freenow.domainvalue.Manufacturer;
 import com.freenow.domainvalue.OnlineStatus;
