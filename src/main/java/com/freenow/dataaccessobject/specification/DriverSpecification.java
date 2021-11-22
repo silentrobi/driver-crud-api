@@ -23,16 +23,20 @@ public class DriverSpecification {
                 predicateList.add(criteriaBuilder.equal(root.get("onlineStatus"), queryParams.getOnlineStatus()));
             }
 
-            final Path<CarDO> brandPath = root.get("car");
+            final Path<CarDO> carPath = root.get("car");
 
             if(queryParams.getLicensePlate() != null){
-                predicateList.add(criteriaBuilder.like(brandPath.<String>get("licensePlate"), queryParams.getLicensePlate()));
+                predicateList.add(criteriaBuilder.like(carPath.<String>get("licensePlate"), queryParams.getLicensePlate()));
             }
             if(queryParams.getRating() != 0.0){
-                predicateList.add(criteriaBuilder.equal(brandPath.<String>get("rating"), queryParams.getRating()));
+                predicateList.add(criteriaBuilder.equal(carPath.<String>get("rating"), queryParams.getRating()));
+            }
+
+            if(queryParams.getEngineType() != null){
+                predicateList.add(criteriaBuilder.equal(carPath.<String>get("engineType"), queryParams.getEngineType()));
             }
             if(queryParams.getManufacturer() != null){
-                predicateList.add(criteriaBuilder.equal(brandPath.<String>get("manufacturer"), queryParams.getManufacturer()));
+                predicateList.add(criteriaBuilder.equal(carPath.<String>get("manufacturer"), queryParams.getManufacturer()));
             }
 
             return criteriaBuilder.and(predicateList.toArray(Predicate[]::new));

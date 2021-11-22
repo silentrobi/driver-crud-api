@@ -1,5 +1,6 @@
 package com.freenow.controller.util;
 
+import com.freenow.domainvalue.EngineType;
 import com.freenow.domainvalue.Manufacturer;
 import com.freenow.domainvalue.OnlineStatus;
 
@@ -9,6 +10,7 @@ public class QueryParams {
     private OnlineStatus onlineStatus;
     private String licensePlate;
     private double rating;
+    private EngineType engineType;
     private Manufacturer manufacturer;
 
     public String getUsername() {
@@ -43,6 +45,14 @@ public class QueryParams {
         this.rating = rating;
     }
 
+    public EngineType getEngineType() {
+        return engineType;
+    }
+
+    public void setEngineType(EngineType engineType) {
+        this.engineType = engineType;
+    }
+
     public Manufacturer getManufacturer() {
         return manufacturer;
     }
@@ -58,6 +68,7 @@ public class QueryParams {
                 ", onlineStatus=" + onlineStatus +
                 ", licensePlate='" + licensePlate + '\'' +
                 ", rating=" + rating +
+                ", engineType=" + engineType +
                 ", manufacturer=" + manufacturer +
                 '}';
     }

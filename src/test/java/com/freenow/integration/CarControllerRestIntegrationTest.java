@@ -8,6 +8,7 @@ import com.freenow.domainvalue.Manufacturer;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,7 +39,8 @@ public class CarControllerRestIntegrationTest {
     @Autowired
     private CarRepository carRepository;
 
-    @After
+    @AfterAll
+    @Before
     public void resetDb() {
         carRepository.deleteAll();
     }
@@ -71,25 +73,8 @@ public class CarControllerRestIntegrationTest {
         String testCase3 = "{\"convertible\":true,\"engineType\":\"DIESEL\",\"id\":0,\"licensePlate\":\"string\",\"manufacturer\":\"AUDI\",\"model\":\"string\",\"rating\":0,\"seatCount\":0}";
 
         // @formatter:off
-        mvc.perform(post(URL_PATH).contentType(MediaType.APPLICATION_JSON).content(testCase2))
+        mvc.perform(post(URL_PATH).contentType(MediaType.APPLICATION_JSON).content(testCase3))
                 .andExpect(status().isBadRequest());
-    }
-
-    @Test
-    public void whenvalidInput_thenReturn400_forCreateCar() throws Exception {
-        String testCase1 = "{\"password\":\"string\"}"; // missing username
-
-        // @formatter:off
-        mvc.perform(post(URL_PATH).contentType(MediaType.APPLICATION_JSON).content(testCase1))
-                .andExpect(status().isBadRequest());
-        // @formatter:on
-
-        String testCase2 = "{\"username\":\"string\"}"; // missing password
-
-        // @formatter:off
-        mvc.perform(post(URL_PATH).contentType(MediaType.APPLICATION_JSON).content(testCase2))
-                .andExpect(status().isBadRequest());
-        // @formatter:on
     }
 
     @Test
@@ -113,7 +98,7 @@ public class CarControllerRestIntegrationTest {
     }
 
     @Test
-    public void whenValidInput_thenReturn400_forCreateCar() throws Exception {
+    public void whenValidInput_thenReturn201_forCreateCar() throws Exception {
 
         String testCase = "{\"convertible\":true,\"engineType\":\"DIESEL\",\"licensePlate\":\"12AXCD12\",\"manufacturer\":\"AUDI\",\"model\":\"2019\",\"rating\":0,\"seatCount\":5}";
 
@@ -187,6 +172,8 @@ public class CarControllerRestIntegrationTest {
 
     @Test
     public void whenValidInput_thenReturn200_forUpdateCar() throws Exception {
+
+        Iterable<CarDO> x = carRepository.findAll();
         CarDO carDO = createTestCar(
                 "15SRX45",
                 5,
