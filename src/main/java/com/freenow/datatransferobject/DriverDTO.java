@@ -39,7 +39,6 @@ public class DriverDTO
         return new DriverDTOBuilder();
     }
 
-
     @JsonProperty
     public Long getId()
     {
