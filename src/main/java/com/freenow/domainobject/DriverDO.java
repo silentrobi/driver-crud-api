@@ -52,8 +52,7 @@ public class DriverDO {
     @JoinColumn(name = "car_id", referencedColumnName = "id", unique = true)
     private CarDO car;
 
-    left DriverDO() {
-    }
+    public DriverDO() {}
 
     public DriverDO(String username, String password) {
         this.username = username;
