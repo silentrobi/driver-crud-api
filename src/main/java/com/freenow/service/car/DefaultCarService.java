@@ -84,7 +84,7 @@ public class DefaultCarService implements CarService {
      */
     @Override
     public void update(Long carId, UpdateCarDTO updateCarDTO) throws EntityNotFoundException, ConstraintsViolationException {
-        CarDO carDO = findCarChecked(carId);
+        final CarDO carDO = findCarChecked(carId);
         try {
             carDO.setLicensePlate(updateCarDTO.getLicensePlate());
             carDO.setEngineType(updateCarDTO.getEngineType());
@@ -106,7 +106,7 @@ public class DefaultCarService implements CarService {
      */
     @Override
     public void delete(Long carId) throws ConstraintsViolationException, EntityNotFoundException {
-        CarDO carDO = findCarChecked(carId);
+        final CarDO carDO = findCarChecked(carId);
         try {
             carRepository.delete(carDO);
         } catch (DataIntegrityViolationException e) {

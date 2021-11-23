@@ -84,7 +84,7 @@ public class DefaultDriverService implements DriverService {
     @Override
     @Transactional
     public void delete(Long driverId) throws EntityNotFoundException {
-        DriverDO driverDO = findDriverChecked(driverId);
+        final DriverDO driverDO = findDriverChecked(driverId);
         driverDO.setDeleted(true);
         driverDO.setCar(null);
     }
@@ -101,7 +101,7 @@ public class DefaultDriverService implements DriverService {
     @Override
     @Transactional
     public void updateLocation(long driverId, double longitude, double latitude) throws EntityNotFoundException {
-        DriverDO driverDO = findDriverChecked(driverId);
+        final DriverDO driverDO = findDriverChecked(driverId);
         driverDO.setCoordinate(new GeoCoordinate(latitude, longitude));
     }
 
@@ -118,12 +118,12 @@ public class DefaultDriverService implements DriverService {
     @Override
     @Transactional
     public void selectCar(long driverId, long carId) throws EntityNotFoundException, DriverOfflineException, CarAlreadyInUseException {
-        DriverDO driverDO = findDriverChecked(driverId);
+        final DriverDO driverDO = findDriverChecked(driverId);
 
         if (driverDO.getOnlineStatus() == OnlineStatus.OFFLINE) throw new DriverOfflineException("Driver is offline.");
 
-        CarDO carDO = carService.find(carId);
-        DriverDO carDriverDO = driverRepository.findByOnlineStatusAndCar_Id(OnlineStatus.ONLINE, carId);
+        final CarDO carDO = carService.find(carId);
+        final DriverDO carDriverDO = driverRepository.findByOnlineStatusAndCar_Id(OnlineStatus.ONLINE, carId);
 
         if (carDriverDO != null) {
             if (carDriverDO.getId() == driverDO.getId()) return;
@@ -143,7 +143,7 @@ public class DefaultDriverService implements DriverService {
     @Override
     @Transactional
     public void deselectCar(long driverId) throws EntityNotFoundException {
-        DriverDO driverDO = findDriverChecked(driverId);
+        final DriverDO driverDO = findDriverChecked(driverId);
         driverDO.setCar(null);
     }
 

@@ -12,6 +12,8 @@ import com.freenow.exception.ConstraintsViolationException;
 import com.freenow.exception.EntityNotFoundException;
 import com.freenow.service.car.CarService;
 import com.freenow.service.driver.DriverService;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.Authorization;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -35,18 +37,21 @@ public class CarController {
         this.carService = carService;
     }
 
+    @ApiOperation(value = "", authorizations = { @Authorization(value="jwtToken") })
     @GetMapping("/{carId}")
     public CarDTO getCar(@PathVariable long carId) throws EntityNotFoundException
     {
         return CarMapper.makeCarDTO(carService.find(carId));
     }
 
+    @ApiOperation(value = "", authorizations = { @Authorization(value="jwtToken") })
     @GetMapping
     public List<CarDTO> getCar()
     {
         return CarMapper.makeCarDTOList(carService.find());
     }
 
+    @ApiOperation(value = "", authorizations = { @Authorization(value="jwtToken") })
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public CarDTO createCar(@Valid @RequestBody CarDTO carDTO) throws ConstraintsViolationException
@@ -55,12 +60,14 @@ public class CarController {
         return CarMapper.makeCarDTO(carService.create(carDO));
     }
 
+    @ApiOperation(value = "", authorizations = { @Authorization(value="jwtToken") })
     @PutMapping("/{carId}")
     public void updateCar(@PathVariable long carId, @Valid @RequestBody UpdateCarDTO updateCarDTO) throws EntityNotFoundException, ConstraintsViolationException
     {
         carService.update(carId, updateCarDTO);
     }
 
+    @ApiOperation(value = "", authorizations = { @Authorization(value="jwtToken") })
     @DeleteMapping("/{carId}")
     public void deleteCar(@PathVariable long carId) throws ConstraintsViolationException, EntityNotFoundException
     {
