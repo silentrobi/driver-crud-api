@@ -30,8 +30,7 @@ public class DriverRepositoryIntegrationTest {
     @Autowired
     private DriverRepository driverRepository;
 
-    @After
-    private void cleanDB(){
+    public void cleanDB(){
         entityManager.createQuery("delete from DriverDO").executeUpdate();
     }
 
