@@ -22,9 +22,9 @@ public class AuthenticationController {
         this.authenticationService = authenticationService;
     }
 
-
     @PostMapping("/authenticate")
-    public AuthenticationResponseDTO getAuthToken(@RequestBody AuthenticationRequestDTO dto) throws InvalidCredentialException{
+    public AuthenticationResponseDTO getAuthToken(@RequestBody AuthenticationRequestDTO dto) throws InvalidCredentialException
+    {
         return authenticationService.authenticate(dto);
     }
 }

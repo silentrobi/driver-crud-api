@@ -41,54 +41,60 @@ public class DriverController {
     private final DriverRepository driverRepository;
 
     @Autowired
-    public DriverController(final DriverService driverService, DriverRepository driverRepository) {
+    public DriverController(final DriverService driverService, DriverRepository driverRepository)
+    {
         this.driverService = driverService;
         this.driverRepository = driverRepository;
     }
 
     @ApiOperation(value = "", authorizations = { @Authorization(value="jwtToken") })
     @GetMapping("/{driverId}")
-    public DriverDTO getDriver(@PathVariable long driverId) throws EntityNotFoundException {
+    public DriverDTO getDriver(@PathVariable long driverId) throws EntityNotFoundException
+    {
         return DriverMapper.makeDriverDTO(driverService.find(driverId));
     }
 
     @ApiOperation(value = "", authorizations = { @Authorization(value="jwtToken") })
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public DriverDTO createDriver(@Valid @RequestBody DriverDTO driverDTO) throws ConstraintsViolationException {
-        DriverDO driverDO = DriverMapper.makeDriverDO(driverDTO);
+    public DriverDTO createDriver(@Valid @RequestBody DriverDTO driverDTO) throws ConstraintsViolationException
+    {
+        final DriverDO driverDO = DriverMapper.makeDriverDO(driverDTO);
         return DriverMapper.makeDriverDTO(driverService.create(driverDO));
     }
 
     @ApiOperation(value = "", authorizations = { @Authorization(value="jwtToken") })
     @DeleteMapping("/{driverId}")
-    public void deleteDriver(@PathVariable long driverId) throws EntityNotFoundException {
+    public void deleteDriver(@PathVariable long driverId) throws EntityNotFoundException
+    {
         driverService.delete(driverId);
     }
 
     @ApiOperation(value = "", authorizations = { @Authorization(value="jwtToken") })
     @PutMapping("/{driverId}")
-    public void updateLocation(
-            @PathVariable long driverId, @RequestParam double longitude, @RequestParam double latitude)
-            throws EntityNotFoundException {
+    public void updateLocation(@PathVariable long driverId, @RequestParam double longitude, @RequestParam double latitude) throws EntityNotFoundException
+    {
         driverService.updateLocation(driverId, longitude, latitude);
     }
 
     @ApiOperation(value = "", authorizations = { @Authorization(value="jwtToken") })
     @PutMapping("/{driverId}/car/{carId}/select")
-    public void selectCar(@PathVariable long driverId, @PathVariable long carId) throws EntityNotFoundException, DriverOfflineException, CarAlreadyInUseException {
+    public void selectCar(@PathVariable long driverId, @PathVariable long carId) throws EntityNotFoundException, DriverOfflineException, CarAlreadyInUseException
+    {
         driverService.selectCar(driverId, carId);
     }
 
     @ApiOperation(value = "", authorizations = { @Authorization(value="jwtToken") })
     @PutMapping("/{driverId}/car/deselect")
-    public void deselectCar(@PathVariable long driverId) throws EntityNotFoundException {
+    public void deselectCar(@PathVariable long driverId) throws EntityNotFoundException
+    {
         driverService.deselectCar(driverId);
     }
 
     @ApiOperation(value = "", authorizations = { @Authorization(value="jwtToken") })
     @GetMapping
-    public List<DriverDTO> findDrivers(QueryParams queryParams) {
+    public List<DriverDTO> findDrivers(QueryParams queryParams)
+    {
         return DriverMapper.makeDriverDTOList(driverService.find(queryParams));
     }
 }

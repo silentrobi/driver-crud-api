@@ -8,11 +8,9 @@ import springfox.documentation.annotations.ApiIgnore;
 @ApiIgnore
 public class HomeController
 {
-
     @RequestMapping("/")
     public String home()
     {
         return "redirect:/swagger-ui/";
     }
-
 }
