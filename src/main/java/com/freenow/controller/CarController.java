@@ -2,16 +2,13 @@ package com.freenow.controller;
 
 
 import com.freenow.controller.mapper.CarMapper;
-import com.freenow.controller.mapper.DriverMapper;
 import com.freenow.datatransferobject.CarDTO;
-import com.freenow.datatransferobject.DriverDTO;
 import com.freenow.datatransferobject.UpdateCarDTO;
 import com.freenow.domainobject.CarDO;
-import com.freenow.domainobject.DriverDO;
 import com.freenow.exception.ConstraintsViolationException;
 import com.freenow.exception.EntityNotFoundException;
 import com.freenow.service.car.CarService;
-import com.freenow.service.driver.DriverService;
+
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.Authorization;
 import org.springframework.beans.factory.annotation.Autowired;

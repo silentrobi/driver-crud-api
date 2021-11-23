@@ -15,5 +15,7 @@ All given tasks have been completed. The project has the following features:
     }
     
 ```
+After getting JWT add it to protected API route `Authorization` header field. E.g. `Authorization=Bearer <token>`
+
 **Note**: You can use swagger-UI to use protected API routes.
     
