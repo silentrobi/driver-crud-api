@@ -1,6 +1,5 @@
 package com.freenow.dataaccessobject;
 
-import com.freenow.domainobject.CarDO;
 import com.freenow.domainobject.DriverDO;
 import com.freenow.domainvalue.OnlineStatus;
 
@@ -14,8 +13,7 @@ import java.util.Optional;
  * Database Access Object for driver table.
  * <p/>
  */
-public interface DriverRepository extends CrudRepository<DriverDO, Long>, JpaSpecificationExecutor<DriverDO>
-{
+public interface DriverRepository extends CrudRepository<DriverDO, Long>, JpaSpecificationExecutor<DriverDO> {
     @Query("select e from DriverDO e left join e.car f where e.deleted=false and e.onlineStatus =?1 and f.id=?2")
     DriverDO findByOnlineStatusAndCar_Id(OnlineStatus onlineStatus, Long carId);
 

@@ -5,7 +5,7 @@ public class AuthenticationRequestDTO {
     private String username;
     private String password;
 
-    public AuthenticationRequestDTO(){}
+    public AuthenticationRequestDTO() {}
 
     public AuthenticationRequestDTO(String username, String password) {
         this.username = username;

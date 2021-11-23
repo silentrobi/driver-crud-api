@@ -32,45 +32,39 @@ public class CarController {
     private final CarService carService;
 
     @Autowired
-    public CarController(final CarService carService)
-    {
+    public CarController(final CarService carService) {
         this.carService = carService;
     }
 
-    @ApiOperation(value = "", authorizations = { @Authorization(value="jwtToken") })
+    @ApiOperation(value = "", authorizations = {@Authorization(value = "jwtToken")})
     @GetMapping("/{carId}")
-    public CarDTO getCar(@PathVariable long carId) throws EntityNotFoundException
-    {
+    public CarDTO getCar(@PathVariable long carId) throws EntityNotFoundException {
         return CarMapper.makeCarDTO(carService.find(carId));
     }
 
-    @ApiOperation(value = "", authorizations = { @Authorization(value="jwtToken") })
+    @ApiOperation(value = "", authorizations = {@Authorization(value = "jwtToken")})
     @GetMapping
-    public List<CarDTO> getCar()
-    {
+    public List<CarDTO> getCar() {
         return CarMapper.makeCarDTOList(carService.find());
     }
 
-    @ApiOperation(value = "", authorizations = { @Authorization(value="jwtToken") })
+    @ApiOperation(value = "", authorizations = {@Authorization(value = "jwtToken")})
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public CarDTO createCar(@Valid @RequestBody CarDTO carDTO) throws ConstraintsViolationException
-    {
+    public CarDTO createCar(@Valid @RequestBody CarDTO carDTO) throws ConstraintsViolationException {
         CarDO carDO = CarMapper.makeCarDO(carDTO);
         return CarMapper.makeCarDTO(carService.create(carDO));
     }
 
-    @ApiOperation(value = "", authorizations = { @Authorization(value="jwtToken") })
+    @ApiOperation(value = "", authorizations = {@Authorization(value = "jwtToken")})
     @PutMapping("/{carId}")
-    public void updateCar(@PathVariable long carId, @Valid @RequestBody UpdateCarDTO updateCarDTO) throws EntityNotFoundException, ConstraintsViolationException
-    {
+    public void updateCar(@PathVariable long carId, @Valid @RequestBody UpdateCarDTO updateCarDTO) throws EntityNotFoundException, ConstraintsViolationException {
         carService.update(carId, updateCarDTO);
     }
 
-    @ApiOperation(value = "", authorizations = { @Authorization(value="jwtToken") })
+    @ApiOperation(value = "", authorizations = {@Authorization(value = "jwtToken")})
     @DeleteMapping("/{carId}")
-    public void deleteCar(@PathVariable long carId) throws ConstraintsViolationException, EntityNotFoundException
-    {
+    public void deleteCar(@PathVariable long carId) throws ConstraintsViolationException, EntityNotFoundException {
         carService.delete(carId);
     }
 }

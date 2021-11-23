@@ -17,14 +17,12 @@ public class AuthenticationController {
     private final AuthenticationService authenticationService;
 
     @Autowired
-    public AuthenticationController(final AuthenticationService authenticationService)
-    {
+    public AuthenticationController(final AuthenticationService authenticationService) {
         this.authenticationService = authenticationService;
     }
 
     @PostMapping("/authenticate")
-    public AuthenticationResponseDTO getAuthToken(@RequestBody AuthenticationRequestDTO dto) throws InvalidCredentialException
-    {
+    public AuthenticationResponseDTO getAuthToken(@RequestBody AuthenticationRequestDTO dto) throws InvalidCredentialException {
         return authenticationService.authenticate(dto);
     }
 }

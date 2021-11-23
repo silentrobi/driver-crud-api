@@ -151,8 +151,8 @@ public class DefaultDriverService implements DriverService {
     /**
      * Finds all drivers by query params (username, online status, rating, manufacturer, and license plate).
      *
-     * @return found driver list
      * @param queryParams
+     * @return found driver list
      */
     public List<DriverDO> find(QueryParams queryParams) {
         return driverRepository.findAll(Specification.where(DriverSpecification.findByQueryParams(queryParams)));

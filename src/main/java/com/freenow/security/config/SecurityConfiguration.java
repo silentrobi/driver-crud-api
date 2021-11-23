@@ -22,7 +22,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     final private UserDetailsService userDetailService;
 
     @Autowired
-    public SecurityConfiguration(final TokenFilter tokenFilter, final UserDetailsService userDetailsService){
+    public SecurityConfiguration(final TokenFilter tokenFilter, final UserDetailsService userDetailsService) {
         this.tokenFilter = tokenFilter;
         this.userDetailService = userDetailsService;
     }
@@ -32,12 +32,12 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     }
 
     @Bean
-    public PasswordEncoder passwordEncoder(){
+    public PasswordEncoder passwordEncoder() {
         return NoOpPasswordEncoder.getInstance();
     }
 
     @Override
-    protected void configure(HttpSecurity http) throws Exception{
+    protected void configure(HttpSecurity http) throws Exception {
         http.csrf()
                 .disable()
                 .authorizeRequests()

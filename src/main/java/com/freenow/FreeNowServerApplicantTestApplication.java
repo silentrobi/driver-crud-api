@@ -18,18 +18,18 @@ import java.util.Arrays;
 
 @EnableSwagger2
 @SpringBootApplication
-public class FreeNowServerApplicantTestApplication {
+public class FreeNowServerApplicantTestApplication implements WebMvcConfigurer {
 
     public static void main(String[] args) {
         SpringApplication.run(FreeNowServerApplicantTestApplication.class, args);
     }
 
 
-//    @Override
-//    public void addInterceptors(InterceptorRegistry registry)
-//    {
-//        registry.addInterceptor(new LoggingInterceptor()).addPathPatterns("/**");
-//    }
+    @Override
+    public void addInterceptors(InterceptorRegistry registry)
+    {
+        registry.addInterceptor(new LoggingInterceptor()).addPathPatterns("/**");
+    }
 
 
     @Bean

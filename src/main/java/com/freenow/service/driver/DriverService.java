@@ -7,10 +7,11 @@ import com.freenow.exception.CarAlreadyInUseException;
 import com.freenow.exception.ConstraintsViolationException;
 import com.freenow.exception.DriverOfflineException;
 import com.freenow.exception.EntityNotFoundException;
+
 import java.util.List;
 
-public interface DriverService
-{
+public interface DriverService {
+    
     DriverDO find(Long driverId) throws EntityNotFoundException;
 
     DriverDO create(DriverDO driverDO) throws ConstraintsViolationException;

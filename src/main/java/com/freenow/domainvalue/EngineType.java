@@ -1,6 +1,5 @@
 package com.freenow.domainvalue;
 
-public enum EngineType
-{
+public enum EngineType {
     ELECTRIC, GAS, DIESEL
 }

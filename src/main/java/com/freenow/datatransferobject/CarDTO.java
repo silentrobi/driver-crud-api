@@ -27,6 +27,7 @@ public class CarDTO {
     private String model;
 
     @DecimalMin(value = "0.0", message = "rating can not be lower than 0.0")
+
     @DecimalMax(value = "10.0", message = "rating can not be higher than 10.0")
     private Double rating;
 

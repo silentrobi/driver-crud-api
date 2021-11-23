@@ -20,8 +20,8 @@ public class DriverMapper {
                 .setPassword(driverDO.getPassword())
                 .setUsername(driverDO.getUsername());
 
-        GeoCoordinate coordinate = driverDO.getCoordinate();
-        CarDO car = driverDO.getCar();
+        final GeoCoordinate coordinate = driverDO.getCoordinate();
+        final CarDO car = driverDO.getCar();
 
         if (coordinate != null) {
             driverDTOBuilder.setCoordinate(coordinate);

@@ -18,8 +18,7 @@ public class UpdateCarDTO {
     @NotNull(message = "Engine type can not be null!")
     private EngineType engineType;
 
-    public UpdateCarDTO() {
-    }
+    public UpdateCarDTO() {}
 
     public UpdateCarDTO(String licensePlate, Double rating, EngineType engineType) {
         this.licensePlate = licensePlate;
