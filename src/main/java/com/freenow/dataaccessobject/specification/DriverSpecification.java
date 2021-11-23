@@ -12,32 +12,34 @@ import java.util.List;
 
 public class DriverSpecification {
 
-    public static Specification<DriverDO> findByQueryParams(QueryParams queryParams){
+    public static Specification<DriverDO> findByQueryParams(QueryParams queryParams) {
 
-        return ((root, criteriaQuery, criteriaBuilder) ->{
+        return ((root, criteriaQuery, criteriaBuilder) -> {
             List<Predicate> predicateList = new ArrayList<>();
-            if(queryParams.getUsername() != null ){
-                predicateList.add( criteriaBuilder.like(root.get("username"), queryParams.getUsername()));
+            if (queryParams.getUsername() != null) {
+                predicateList.add(criteriaBuilder.like(root.get("username"), "%" + queryParams.getUsername() + "%"));
             }
-            if(queryParams.getOnlineStatus() != null){
+            if (queryParams.getOnlineStatus() != null) {
                 predicateList.add(criteriaBuilder.equal(root.get("onlineStatus"), queryParams.getOnlineStatus()));
             }
 
             final Path<CarDO> carPath = root.get("car");
 
-            if(queryParams.getLicensePlate() != null){
-                predicateList.add(criteriaBuilder.like(carPath.<String>get("licensePlate"), queryParams.getLicensePlate()));
+            if (queryParams.getLicensePlate() != null) {
+                predicateList.add(criteriaBuilder.like(carPath.<String>get("licensePlate"), "%" + queryParams.getLicensePlate() + "%"));
             }
-            if(queryParams.getRating() != 0.0){
+            if (queryParams.getRating() >= 0.0) {
                 predicateList.add(criteriaBuilder.equal(carPath.<String>get("rating"), queryParams.getRating()));
             }
 
-            if(queryParams.getEngineType() != null){
+            if (queryParams.getEngineType() != null) {
                 predicateList.add(criteriaBuilder.equal(carPath.<String>get("engineType"), queryParams.getEngineType()));
             }
-            if(queryParams.getManufacturer() != null){
+            if (queryParams.getManufacturer() != null) {
                 predicateList.add(criteriaBuilder.equal(carPath.<String>get("manufacturer"), queryParams.getManufacturer()));
             }
+
+            predicateList.add(criteriaBuilder.equal(root.get("deleted"), false));
 
             return criteriaBuilder.and(predicateList.toArray(Predicate[]::new));
         });

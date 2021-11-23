@@ -86,6 +86,7 @@ public class DefaultDriverService implements DriverService {
     public void delete(Long driverId) throws EntityNotFoundException {
         DriverDO driverDO = findDriverChecked(driverId);
         driverDO.setDeleted(true);
+        driverDO.setCar(null);
     }
 
 

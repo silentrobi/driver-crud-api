@@ -108,7 +108,7 @@ public class DefaultCarService implements CarService {
     @Transactional
     public void delete(Long carId) throws EntityNotFoundException {
         CarDO carDO = findCarChecked(carId);
-        carDO.setDeleted(true);
+        carRepository.delete(carDO);
     }
 
     private CarDO findCarChecked(Long carId) throws EntityNotFoundException {

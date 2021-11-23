@@ -36,6 +36,8 @@ public class DriverServiceUnitTest {
 
     @MockBean
     DriverRepository driverRepository;
+    @MockBean
+    CarService carService;
 
     @TestConfiguration
     static class DefaultDriverServiceContextConfiguration {

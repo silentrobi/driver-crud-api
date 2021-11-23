@@ -16,7 +16,6 @@ import java.time.ZonedDateTime;
         name = "car",
         uniqueConstraints = @UniqueConstraint(name = "uc_license_plate", columnNames = {"licensePlate"})
 )
-@Where(clause = "deleted=false")
 public class CarDO {
 
     @Id
@@ -52,13 +51,10 @@ public class CarDO {
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
     private ZonedDateTime dateCreated = ZonedDateTime.now();
 
-    @Column(nullable = false)
-    private Boolean deleted = false;
-
     @OneToOne(mappedBy = "car")
     private DriverDO driver;
 
-    private CarDO(){}
+    public CarDO(){}
 
     public CarDO(String licensePlate,
                  Integer seatCount,
@@ -140,13 +136,5 @@ public class CarDO {
 
     public void setManufacturer(Manufacturer manufacturer) {
         this.manufacturer = manufacturer;
-    }
-
-    public Boolean getDeleted() {
-        return deleted;
-    }
-
-    public void setDeleted(Boolean deleted) {
-        this.deleted = deleted;
     }
 }

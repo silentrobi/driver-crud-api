@@ -9,7 +9,7 @@ public class QueryParams {
     private String username;
     private OnlineStatus onlineStatus;
     private String licensePlate;
-    private double rating;
+    private double rating = -1.0;
     private EngineType engineType;
     private Manufacturer manufacturer;
 

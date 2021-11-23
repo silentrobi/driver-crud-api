@@ -5,13 +5,12 @@ import com.freenow.dataaccessobject.CarRepository;
 import com.freenow.dataaccessobject.DriverRepository;
 import com.freenow.datatransferobject.UpdateCarDTO;
 import com.freenow.domainobject.CarDO;
-import com.freenow.domainobject.DriverDO;
 import com.freenow.domainvalue.EngineType;
 import com.freenow.domainvalue.Manufacturer;
 import com.freenow.exception.ConstraintsViolationException;
 import com.freenow.exception.EntityNotFoundException;
 import com.freenow.service.car.CarService;
-import com.freenow.service.driver.DriverService;
+
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -34,9 +33,13 @@ public class CarServiceIntegrationTest {
     @Autowired
     private CarRepository carRepository;
 
+    @Autowired
+    private DriverRepository driverRepository;
+
     @AfterAll
     @Before
     public void resetDb() {
+        driverRepository.deleteAll();
         carRepository.deleteAll();
     }
 

@@ -16,7 +16,6 @@ import org.springframework.format.annotation.DateTimeFormat;
         name = "driver",
         uniqueConstraints = @UniqueConstraint(name = "uc_username", columnNames = {"username"})
 )
-@Where(clause = "deleted=false")
 public class DriverDO {
 
     @Id
@@ -53,7 +52,7 @@ public class DriverDO {
     @JoinColumn(name = "car_id", referencedColumnName = "id", unique = true)
     private CarDO car;
 
-    private DriverDO() {
+    left DriverDO() {
     }
 
     public DriverDO(String username, String password) {

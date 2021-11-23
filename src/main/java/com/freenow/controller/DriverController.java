@@ -74,8 +74,8 @@ public class DriverController {
         driverService.selectCar(driverId, carId);
     }
 
-    @PutMapping("/{driverId}/car/{carId}/deselect")
-    public void deselectCar(@PathVariable long driverId, @PathVariable long carId) throws EntityNotFoundException {
+    @PutMapping("/{driverId}/car/deselect")
+    public void deselectCar(@PathVariable long driverId) throws EntityNotFoundException {
         driverService.deselectCar(driverId);
     }
 
