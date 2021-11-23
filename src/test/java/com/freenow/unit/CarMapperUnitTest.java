@@ -5,7 +5,7 @@ import com.freenow.datatransferobject.CarDTO;
 import com.freenow.domainobject.CarDO;
 import com.freenow.domainvalue.EngineType;
 import com.freenow.domainvalue.Manufacturer;
-import com.freenow.service.car.CarService;
+
 import org.junit.Assert;
 import org.junit.Test;
 

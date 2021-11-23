@@ -1,13 +1,9 @@
 package com.freenow.unit;
 
-import com.freenow.controller.mapper.CarMapper;
 import com.freenow.controller.mapper.DriverMapper;
-import com.freenow.datatransferobject.CarDTO;
 import com.freenow.datatransferobject.DriverDTO;
-import com.freenow.domainobject.CarDO;
 import com.freenow.domainobject.DriverDO;
-import com.freenow.domainvalue.EngineType;
-import com.freenow.domainvalue.Manufacturer;
+
 import org.junit.Assert;
 import org.junit.Test;
 

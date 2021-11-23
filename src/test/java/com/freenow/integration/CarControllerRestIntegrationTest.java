@@ -1,16 +1,15 @@
 package com.freenow.integration;
 
 import com.freenow.dataaccessobject.CarRepository;
-import com.freenow.datatransferobject.CarDTO;
 import com.freenow.domainobject.CarDO;
 import com.freenow.domainvalue.EngineType;
 import com.freenow.domainvalue.Manufacturer;
-import org.junit.After;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.runner.RunWith;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;

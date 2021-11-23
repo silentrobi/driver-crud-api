@@ -14,12 +14,14 @@ import com.freenow.exception.ConstraintsViolationException;
 import com.freenow.exception.DriverOfflineException;
 import com.freenow.exception.EntityNotFoundException;
 import com.freenow.service.driver.DriverService;
+
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Assertions;
 import org.junit.runner.RunWith;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;

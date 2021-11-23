@@ -1,25 +1,22 @@
 package com.freenow.unit;
 
-import com.freenow.controller.util.QueryParams;
 import com.freenow.dataaccessobject.CarRepository;
-import com.freenow.dataaccessobject.DriverRepository;
 import com.freenow.datatransferobject.UpdateCarDTO;
 import com.freenow.domainobject.CarDO;
-import com.freenow.domainobject.DriverDO;
 import com.freenow.domainvalue.EngineType;
 import com.freenow.domainvalue.Manufacturer;
 import com.freenow.exception.ConstraintsViolationException;
 import com.freenow.exception.EntityNotFoundException;
 import com.freenow.service.car.CarService;
 import com.freenow.service.car.DefaultCarService;
-import com.freenow.service.driver.DefaultDriverService;
-import com.freenow.service.driver.DriverService;
+
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
 import org.junit.runner.RunWith;
-import org.mockito.Mock;
+
 import org.mockito.Mockito;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.boot.test.mock.mockito.MockBean;
