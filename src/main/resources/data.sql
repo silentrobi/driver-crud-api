@@ -4,14 +4,14 @@
 
 --- Create 3 cars
 
-insert into car (id, license_plate, seat_count, convertible, model, rating, engine_type, manufacturer, date_created, deleted)
-values (1, '14AAC630', 5, false, '2003', 8.2, 'DIESEL', 'BMW', now(), false);
+insert into car (id, license_plate, seat_count, convertible, model, rating, engine_type, manufacturer, date_created)
+values (1, '14AAC630', 5, false, '2003', 8.2, 'DIESEL', 'BMW', now());
 
-insert into car (id, license_plate, seat_count, convertible, model, rating, engine_type, manufacturer, date_created, deleted)
-values (2, '15ACF680', 5, false, '2006', 7.2, 'GAS', 'TOYOTA', now(), false);
+insert into car (id, license_plate, seat_count, convertible, model, rating, engine_type, manufacturer, date_created)
+values (2, '15ACF680', 5, false, '2006', 7.2, 'GAS', 'TOYOTA', now());
 
-insert into car (id, license_plate, seat_count, convertible, model, rating, engine_type, manufacturer, date_created, deleted)
-values (3, '14CAE631', 5, false, '2009', 8.8, 'ELECTRIC', 'FORD', now(), false);
+insert into car (id, license_plate, seat_count, convertible, model, rating, engine_type, manufacturer, date_created)
+values (3, '14CAE631', 5, false, '2009', 8.8, 'ELECTRIC', 'FORD', now());
 
 -- Create 3 OFFLINE drivers
 
