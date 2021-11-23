@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class DriverMapper {
+
     public static DriverDO makeDriverDO(DriverDTO driverDTO) {
         return new DriverDO(driverDTO.getUsername(), driverDTO.getPassword());
     }

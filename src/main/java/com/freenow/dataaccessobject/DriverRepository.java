@@ -14,6 +14,7 @@ import java.util.Optional;
  * <p/>
  */
 public interface DriverRepository extends CrudRepository<DriverDO, Long>, JpaSpecificationExecutor<DriverDO> {
+
     @Query("select e from DriverDO e left join e.car f where e.deleted=false and e.onlineStatus =?1 and f.id=?2")
     DriverDO findByOnlineStatusAndCar_Id(OnlineStatus onlineStatus, Long carId);
 

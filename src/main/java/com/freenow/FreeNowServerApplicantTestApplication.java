@@ -24,13 +24,11 @@ public class FreeNowServerApplicantTestApplication implements WebMvcConfigurer {
         SpringApplication.run(FreeNowServerApplicantTestApplication.class, args);
     }
 
-
     @Override
     public void addInterceptors(InterceptorRegistry registry)
     {
         registry.addInterceptor(new LoggingInterceptor()).addPathPatterns("/**");
     }
-
 
     @Bean
     public Docket docket() {

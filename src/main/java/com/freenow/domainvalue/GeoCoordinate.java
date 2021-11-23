@@ -11,11 +11,12 @@ import org.springframework.data.geo.Point;
 
 @Embeddable
 public class GeoCoordinate {
+
     private static final int MAX_LATITUDE = 90;
     private static final int MIN_LATITUDE = -90;
     private static final int MAX_LONGITUDE = 180;
     private static final int MIN_LONGITUDE = -180;
-    
+
     @Column(name = "coordinate")
     private final Point point;
 
