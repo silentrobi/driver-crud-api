@@ -8,7 +8,10 @@ import com.freenow.domainvalue.EngineType;
 import com.freenow.domainvalue.Manufacturer;
 import com.freenow.exception.EntityNotFoundException;
 import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,16 +33,15 @@ public class DriverRepositoryIntegrationTest {
     @Autowired
     private DriverRepository driverRepository;
 
+    @Before
+    @AfterAll
     public void cleanDB(){
         entityManager.createQuery("delete from DriverDO").executeUpdate();
     }
 
     @Test
     public void whenFindById_thenThrowsEntityNotFoundException() {
-
-        cleanDB();
-
-        // given
+        // Given
         DriverDO driver = new DriverDO("driver01", "12345");
 
         entityManager.persist(driver);
@@ -53,10 +55,7 @@ public class DriverRepositoryIntegrationTest {
 
     @Test
     public void whenFindById_thenReturnDriver() throws Exception {
-
-        cleanDB();
-
-        // given
+        // Given
         DriverDO driver = new DriverDO(
                 "driver01",
                 "12345"
@@ -65,37 +64,31 @@ public class DriverRepositoryIntegrationTest {
         entityManager.persist(driver);
         entityManager.flush();
 
-        // when
+        // When
         DriverDO found = driverRepository.findById(driver.getId()).orElseThrow(() -> new EntityNotFoundException("Could not find entity with id: " + driver.getId()));;
 
-        // then
+        // Then
         assertEquals(driver.getUsername(), found.getUsername());
     }
 
     @Test
     public void whenSave_thenReturnNewDriver() {
-
-        cleanDB();
-
-        // given
+        // Given
         DriverDO driver = new DriverDO(
                 "driver01",
-                "12345"
-        );
+                "12345");
 
-        // when
+        // When
         DriverDO driverDO = driverRepository.save(driver);
 
-        // then
+        // Then
         assertEquals(driver.getUsername(), driverDO.getUsername());
         assertEquals(driver.getPassword(), driverDO.getPassword());
     }
 
     @Test
     public void whenSaveWithSameUsername_thenThrowsDataIntegrityViolationException() {
-
-        cleanDB();
-
+        // Given
         DriverDO driver = new DriverDO(
                 "driver01",
                 "12345"
@@ -104,14 +97,12 @@ public class DriverRepositoryIntegrationTest {
         entityManager.persist(driver);
         entityManager.flush();
 
-
-        //given
         DriverDO driverWithSameUsername = new DriverDO(
                 "driver01",
                 "12121"
         );
 
-        //when and then
+        // When and Then
         Assertions.assertThrows(DataIntegrityViolationException.class, () -> {
             driverRepository.save(driverWithSameUsername);
         });

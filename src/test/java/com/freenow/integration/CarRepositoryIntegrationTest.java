@@ -7,7 +7,9 @@ import com.freenow.domainvalue.Manufacturer;
 import com.freenow.exception.EntityNotFoundException;
 import com.google.common.collect.Lists;
 
+import org.junit.Before;
 import org.junit.Test;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Assertions;
 
 import org.junit.runner.RunWith;
@@ -31,16 +33,15 @@ public class CarRepositoryIntegrationTest {
     @Autowired
     private CarRepository carRepository;
 
-    private void cleanDB(){
+    @Before
+    @AfterAll
+    public void cleanDB() {
         entityManager.createQuery("delete from CarDO").executeUpdate();
     }
 
     @Test
     public void whenFindById_thenThrowsEntityNotFoundException() {
-
-        cleanDB();
-
-        // given
+        // Given
         CarDO car = new CarDO(
                 "AZ0123",
                 5,
@@ -62,10 +63,7 @@ public class CarRepositoryIntegrationTest {
 
     @Test
     public void whenFindById_thenReturnCar() throws Exception {
-
-        cleanDB();
-
-        // given
+        // Given
         CarDO car = new CarDO(
                 "AZ0123",
                 5,
@@ -79,19 +77,17 @@ public class CarRepositoryIntegrationTest {
         entityManager.persist(car);
         entityManager.flush();
 
-        // when
-        CarDO found = carRepository.findById(car.getId()).orElseThrow(() -> new EntityNotFoundException("Could not find entity with id: " + car.getId()));;
+        // When
+        CarDO found = carRepository.findById(car.getId()).orElseThrow(() -> new EntityNotFoundException("Could not find entity with id: " + car.getId()));
+        ;
 
-        // then
+        // Then
         assertEquals(car.getLicensePlate(), found.getLicensePlate());
     }
 
     @Test
-    public void whenSave_thenReturnNewCar() throws Exception {
-
-        cleanDB();
-
-        // given
+    public void whenSave_thenReturnNewCar() {
+        // Given
         CarDO car = new CarDO(
                 "AZ0123",
                 5,
@@ -102,10 +98,10 @@ public class CarRepositoryIntegrationTest {
                 Manufacturer.BMW
         );
 
-        // when
+        // When
         CarDO carDO = carRepository.save(car);
 
-        // then
+        // Then
         assertEquals(car.getLicensePlate(), carDO.getLicensePlate());
         assertEquals(car.getEngineType(), carDO.getEngineType());
         assertEquals(car.getConvertible(), carDO.getConvertible());
@@ -113,9 +109,8 @@ public class CarRepositoryIntegrationTest {
     }
 
     @Test
-    public void whenSaveWithSameLicensePlate_thenThrowsDataIntegrityViolationException() throws Exception {
-
-        cleanDB();
+    public void whenSaveWithSameLicensePlate_thenThrowsDataIntegrityViolationException() {
+        // Given
         CarDO car = new CarDO(
                 "AZ0123",
                 5,
@@ -129,8 +124,6 @@ public class CarRepositoryIntegrationTest {
         entityManager.persist(car);
         entityManager.flush();
 
-
-        //given
         CarDO carWithSameLicensePlate = new CarDO(
                 "AZ0123", //same license plate
                 5,
@@ -141,19 +134,15 @@ public class CarRepositoryIntegrationTest {
                 Manufacturer.AUDI
         );
 
-        //when and then
+        // When and Then
         Assertions.assertThrows(DataIntegrityViolationException.class, () -> {
             carRepository.save(carWithSameLicensePlate);
         });
     }
 
-
     @Test
-    public void whenFind_thenReturnAllCars() throws Exception {
-
-        cleanDB();
-
-        // given
+    public void whenFind_thenReturnAllCars() {
+        // Given
         CarDO car1 = new CarDO(
                 "AZ0123",
                 5,
@@ -180,10 +169,10 @@ public class CarRepositoryIntegrationTest {
         entityManager.persist(car2);
         entityManager.flush();
 
-        // when
+        // When
         List<CarDO> found = Lists.newArrayList(carRepository.findAll().iterator());
 
-        // then
+        // Then
         assertEquals(2, found.size());
         assertEquals(car1.getLicensePlate(), found.get(0).getLicensePlate());
         assertEquals(car1.getEngineType(), found.get(0).getEngineType());
