@@ -269,7 +269,7 @@ public class DriverControllerRestIntegrationTest {
         String testCase = "{}";
 
         // @formatter:off
-        mvc.perform(put(URL_PATH + "/" + driverDO.getId() + "/car/"+ carDO.getId() +"/deselect").contentType(MediaType.APPLICATION_JSON).content(testCase))
+        mvc.perform(put(URL_PATH + "/" + driverDO.getId() + "/car/deselect").contentType(MediaType.APPLICATION_JSON).content(testCase))
                 .andExpect(status().isOk());
         // @formatter:on
     }
@@ -279,7 +279,7 @@ public class DriverControllerRestIntegrationTest {
         String testCase = "{}";
 
         // @formatter:off
-        mvc.perform(put(URL_PATH + "/50/car/1/deselect").contentType(MediaType.APPLICATION_JSON).content(testCase))
+        mvc.perform(put(URL_PATH + "/50/car/deselect").contentType(MediaType.APPLICATION_JSON).content(testCase))
                 .andExpect(status().isNotFound());
         // @formatter:on
     }
