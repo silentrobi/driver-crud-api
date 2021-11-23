@@ -34,8 +34,7 @@ public class CarMapper {
         return carDTOBuilder.createCarDTO();
     }
 
-
-    public static List<CarDTO> makeDriverDTOList(Collection<CarDO> cars) {
+    public static List<CarDTO> makeCarDTOList(Collection<CarDO> cars) {
         return cars.stream()
                 .map(CarMapper::makeCarDTO)
                 .collect(Collectors.toList());

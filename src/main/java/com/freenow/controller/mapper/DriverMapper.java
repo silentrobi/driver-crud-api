@@ -14,7 +14,6 @@ public class DriverMapper {
         return new DriverDO(driverDTO.getUsername(), driverDTO.getPassword());
     }
 
-
     public static DriverDTO makeDriverDTO(DriverDO driverDO) {
         DriverDTO.DriverDTOBuilder driverDTOBuilder = DriverDTO.newBuilder()
                 .setId(driverDO.getId())
@@ -27,7 +26,7 @@ public class DriverMapper {
         if (coordinate != null) {
             driverDTOBuilder.setCoordinate(coordinate);
         }
-        if(car != null){
+        if (car != null) {
             driverDTOBuilder.setCar(CarMapper.makeCarDTO(car));
         }
 
@@ -35,9 +34,8 @@ public class DriverMapper {
     }
 
     public static List<DriverDTO> makeDriverDTOList(Collection<DriverDO> drivers) {
-        List<DriverDTO> x =  drivers.stream()
+        return drivers.stream()
                 .map(DriverMapper::makeDriverDTO)
                 .collect(Collectors.toList());
-        return x;
     }
 }

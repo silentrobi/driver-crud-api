@@ -44,7 +44,7 @@ public class CarController {
     @GetMapping
     public List<CarDTO> getCar()
     {
-        return CarMapper.makeDriverDTOList(carService.find());
+        return CarMapper.makeCarDTOList(carService.find());
     }
 
     @PostMapping
