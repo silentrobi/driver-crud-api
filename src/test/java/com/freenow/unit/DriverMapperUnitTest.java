@@ -13,7 +13,7 @@ import java.util.List;
 public class DriverMapperUnitTest {
 
     @Test
-    public void test_makeDriverDO(){
+    public void test_makeDriverDO() {
         DriverDTO driverDTO = DriverDTO.newBuilder()
                 .setUsername("driver01")
                 .setPassword("12345")
@@ -31,13 +31,13 @@ public class DriverMapperUnitTest {
         DriverDO driverDO2 = new DriverDO("driver02", "54321");
 
 
-        List<DriverDTO> found = DriverMapper.makeDriverDTOList(Arrays.asList(driverDO1,driverDO2));
+        List<DriverDTO> found = DriverMapper.makeDriverDTOList(Arrays.asList(driverDO1, driverDO2));
 
         Assert.assertEquals(2, found.size());
     }
 
     @Test
-    public void test_makeCarDTO(){
+    public void test_makeCarDTO() {
         DriverDO driverDO = new DriverDO("driver01", "12345");
 
         DriverDTO driverDTO = DriverMapper.makeDriverDTO(driverDO);

@@ -35,7 +35,7 @@ public class DriverRepositoryIntegrationTest {
 
     @Before
     @AfterAll
-    public void cleanDB(){
+    public void cleanDB() {
         entityManager.createQuery("delete from DriverDO").executeUpdate();
     }
 
@@ -65,7 +65,8 @@ public class DriverRepositoryIntegrationTest {
         entityManager.flush();
 
         // When
-        DriverDO found = driverRepository.findById(driver.getId()).orElseThrow(() -> new EntityNotFoundException("Could not find entity with id: " + driver.getId()));;
+        DriverDO found = driverRepository.findById(driver.getId()).orElseThrow(() -> new EntityNotFoundException("Could not find entity with id: " + driver.getId()));
+        ;
 
         // Then
         assertEquals(driver.getUsername(), found.getUsername());

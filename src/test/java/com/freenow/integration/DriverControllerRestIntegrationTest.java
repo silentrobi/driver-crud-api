@@ -7,12 +7,12 @@ import com.freenow.domainobject.DriverDO;
 import com.freenow.domainvalue.EngineType;
 import com.freenow.domainvalue.Manufacturer;
 import com.freenow.domainvalue.OnlineStatus;
-import org.hamcrest.CoreMatchers;
-import org.junit.After;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.runner.RunWith;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -141,7 +141,6 @@ public class DriverControllerRestIntegrationTest {
 
     @Test
     public void whenMissingRequiredInputFields_thenReturn400_forUpdateLocation() throws Exception {
-
         String testCase = "{}";
 
         // @formatter:off
@@ -214,7 +213,7 @@ public class DriverControllerRestIntegrationTest {
         String testCase = "{}";
 
         // @formatter:off
-        mvc.perform(put(URL_PATH + "/" + targetDriverDO.getId() + "/car/"+ carDO.getId() +"/select").contentType(MediaType.APPLICATION_JSON).content(testCase))
+        mvc.perform(put(URL_PATH + "/" + targetDriverDO.getId() + "/car/" + carDO.getId() + "/select").contentType(MediaType.APPLICATION_JSON).content(testCase))
                 .andExpect(status().isBadRequest());
         // @formatter:on
     }
@@ -243,7 +242,7 @@ public class DriverControllerRestIntegrationTest {
 
         // When
         // @formatter:off
-        mvc.perform(put(URL_PATH + "/" + targetDriverDO.getId() + "/car/"+ carDO.getId() +"/select").contentType(MediaType.APPLICATION_JSON).content(testCase))
+        mvc.perform(put(URL_PATH + "/" + targetDriverDO.getId() + "/car/" + carDO.getId() + "/select").contentType(MediaType.APPLICATION_JSON).content(testCase))
                 .andExpect(status().isOk());
         // @formatter:on
     }
@@ -286,7 +285,7 @@ public class DriverControllerRestIntegrationTest {
 
     @Test
     public void whenInvalidDriverId_thenReturn404_forGetDriver() throws Exception {
-      createTestDriver("driver01", "12345");
+        createTestDriver("driver01", "12345");
 
         // @formatter:off
         mvc.perform(get(URL_PATH + "/100"))
@@ -396,7 +395,7 @@ public class DriverControllerRestIntegrationTest {
         driverDO2.setCar(carDO2);
         driverDO3.setCar(carDO3);
 
-        driverRepository.saveAll(Arrays.asList(driverDO1,driverDO2,driverDO3));
+        driverRepository.saveAll(Arrays.asList(driverDO1, driverDO2, driverDO3));
 
         // @formatter:off
         mvc.perform(get(URL_PATH + "/?engineType=DIESEL"))

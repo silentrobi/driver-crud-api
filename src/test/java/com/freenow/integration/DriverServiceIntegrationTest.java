@@ -61,7 +61,6 @@ public class DriverServiceIntegrationTest {
 
     @Test
     public void whenAlreadyExistUsernae_ThenThrowsConstraintsViolationException() {
-
         DriverDO driverDO = createTestDriver("driver01", "12345");
 
         DriverDO targetDriverDO = new DriverDO("driver01", "41321");
@@ -72,7 +71,6 @@ public class DriverServiceIntegrationTest {
 
     @Test
     public void whenValidInput_ThenCreateDriver() throws Exception {
-
         DriverDO targetDriverDO = new DriverDO("driver01", "41321");
 
         DriverDO driverDO = driverService.create(targetDriverDO);
@@ -82,7 +80,6 @@ public class DriverServiceIntegrationTest {
 
     @Test
     public void whenValidInput_UpdateLocation() throws Exception {
-
         DriverDO driverDO = createTestDriver("driver01", "12345");
 
         driverService.updateLocation(driverDO.getId(), 78.09, 40.43);
@@ -95,7 +92,6 @@ public class DriverServiceIntegrationTest {
 
     @Test
     public void selectCar_whenInvalidDriver_ThrowEntityNotFoundException() throws Exception {
-
         DriverDO driverDO = createTestDriver("driver01", "12345");
 
         CarDO carDO = createTestCar(
@@ -114,8 +110,7 @@ public class DriverServiceIntegrationTest {
     }
 
     @Test
-    public void selectCar_whenOfflineDriver_ThrowDriverOfflineException() throws Exception {
-
+    public void selectCar_whenOfflineDriver_ThrowDriverOfflineException() {
         DriverDO driverDO = createTestDriver("driver01", "12345");
 
         CarDO carDO = createTestCar(
@@ -135,7 +130,6 @@ public class DriverServiceIntegrationTest {
 
     @Test
     public void selectCar_whenInvalidCarId_ThrowEntityNotFoundException() throws Exception {
-
         DriverDO driverDO = createTestDriver("driver01", "12345");
 
         CarDO carDO = createTestCar(
@@ -155,7 +149,6 @@ public class DriverServiceIntegrationTest {
 
     @Test
     public void selectCar_whenAlreadyInUse_ThrowCarAlreadyInUseException() throws Exception {
-
         DriverDO driverDO1 = createTestDriver("driver01", "12345");
         DriverDO driverDO2 = createTestDriver("driver02", "12345");
         CarDO carDO = createTestCar(
@@ -181,7 +174,6 @@ public class DriverServiceIntegrationTest {
 
     @Test
     public void selectCar_whenValidOnlineDriver_ThrowCarAlreadyInUseException() throws Exception {
-
         DriverDO driverDO1 = createTestDriver("driver01", "12345");
         CarDO carDO = createTestCar(
                 "12AXCD12",
@@ -208,7 +200,6 @@ public class DriverServiceIntegrationTest {
 
     @Test
     public void selectCar_whenValidOnlineDriver() throws Exception {
-
         DriverDO driverDO1 = createTestDriver("driver01", "12345");
         CarDO carDO = createTestCar(
                 "12AXCD12",
@@ -235,7 +226,6 @@ public class DriverServiceIntegrationTest {
 
     @Test
     public void deselectCar_whenValidOnlineDriver() throws Exception {
-
         DriverDO driverDO1 = createTestDriver("driver01", "12345");
         CarDO carDO = createTestCar(
                 "12AXCD12",
@@ -260,7 +250,6 @@ public class DriverServiceIntegrationTest {
 
     @Test
     public void deselectCar_whenInvalidOnlineDriver_throwEntityNotFoundException() throws Exception {
-
         DriverDO driverDO1 = createTestDriver("driver01", "12345");
 
         Assertions.assertThrows(EntityNotFoundException.class, () -> {
@@ -281,7 +270,6 @@ public class DriverServiceIntegrationTest {
 
     @Test
     public void findDriverByValidId_returnDriver() throws Exception {
-
         DriverDO driverDO1 = createTestDriver("driver01", "12345");
 
         DriverDO found = driverService.find(driverDO1.getId());
@@ -291,7 +279,6 @@ public class DriverServiceIntegrationTest {
 
     @Test
     public void findAllDrivers() throws Exception {
-
         QueryParams queryParams = new QueryParams();
 
         DriverDO driverDO1 = createTestDriver("driver01", "12345");
@@ -305,7 +292,6 @@ public class DriverServiceIntegrationTest {
 
     @Test
     public void findAllDrivers_ByOfflineStatus() throws Exception {
-
         QueryParams queryParams = new QueryParams();
         queryParams.setOnlineStatus(OnlineStatus.OFFLINE);
 
@@ -323,7 +309,6 @@ public class DriverServiceIntegrationTest {
 
     @Test
     public void findAllDrivers_ByManufacturer() throws Exception {
-
         QueryParams queryParams = new QueryParams();
         queryParams.setManufacturer(Manufacturer.AUDI);
 
@@ -364,7 +349,6 @@ public class DriverServiceIntegrationTest {
 
     @Test
     public void findAllDrivers_ByManufacturerAndEngineType() throws Exception {
-
         QueryParams queryParams = new QueryParams();
         queryParams.setManufacturer(Manufacturer.AUDI);
         queryParams.setEngineType(EngineType.DIESEL);
@@ -414,7 +398,7 @@ public class DriverServiceIntegrationTest {
     }
 
     @Test
-    public void deleteByValidDriverId() throws Exception{
+    public void deleteByValidDriverId() throws Exception {
         DriverDO driverDO1 = createTestDriver("driver05", "12345");
 
         driverService.delete(driverDO1.getId());

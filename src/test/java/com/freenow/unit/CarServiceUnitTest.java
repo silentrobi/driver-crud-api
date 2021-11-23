@@ -143,7 +143,7 @@ public class CarServiceUnitTest {
     }
 
     @Test
-    public void updateCar_shouldThrowExceptionForSameLicensePlate(){
+    public void updateCar_shouldThrowExceptionForSameLicensePlate() {
         CarDO carDO = new CarDO(
                 "12AXCD12",
                 5,
@@ -155,7 +155,8 @@ public class CarServiceUnitTest {
         );
 
         Mockito.when(carRepository.findById(carDO.getId())).thenReturn(Optional.of(carDO));
-        Mockito.when(carRepository.save(carDO)).thenThrow(DataIntegrityViolationException.class);;
+        Mockito.when(carRepository.save(carDO)).thenThrow(DataIntegrityViolationException.class);
+        ;
 
         UpdateCarDTO updateCarDTO = new UpdateCarDTO();
         updateCarDTO.setEngineType(EngineType.DIESEL);
@@ -168,7 +169,7 @@ public class CarServiceUnitTest {
     }
 
     @Test
-    public void updateCar_shouldThrowExceptionForInvalidCarId(){
+    public void updateCar_shouldThrowExceptionForInvalidCarId() {
 
         UpdateCarDTO updateCarDTO = new UpdateCarDTO();
         updateCarDTO.setEngineType(EngineType.DIESEL);

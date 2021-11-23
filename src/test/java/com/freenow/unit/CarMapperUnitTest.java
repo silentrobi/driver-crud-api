@@ -15,7 +15,7 @@ import java.util.List;
 public class CarMapperUnitTest {
 
     @Test
-    public void test_makeCarDO(){
+    public void test_makeCarDO() {
         CarDTO carDTO = CarDTO.newBuilder()
                 .setLicensePlate("12ZX234")
                 .setEngineType(EngineType.DIESEL)
@@ -31,7 +31,7 @@ public class CarMapperUnitTest {
     }
 
     @Test
-    public void test_makeCarDTO(){
+    public void test_makeCarDTO() {
         CarDO carDO = new CarDO(
                 "12AXCD12",
                 5,
@@ -70,7 +70,7 @@ public class CarMapperUnitTest {
                 Manufacturer.FORD
         );
 
-        List<CarDTO> found = CarMapper.makeCarDTOList(Arrays.asList(carDO1,carDO2));
+        List<CarDTO> found = CarMapper.makeCarDTOList(Arrays.asList(carDO1, carDO2));
 
         Assert.assertEquals(2, found.size());
     }

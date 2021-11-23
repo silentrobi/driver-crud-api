@@ -51,7 +51,6 @@ public class CarServiceIntegrationTest {
 
     @Test
     public void whenCreateCar_withAlreadyExistLicensePlate_ThenThrowsConstraintsViolationException() {
-
         CarDO carDO = createTestCar(
                 "12AXCD12",
                 5,
@@ -77,7 +76,6 @@ public class CarServiceIntegrationTest {
 
     @Test
     public void whenValidInput_ThenCreateCar() throws Exception {
-
         CarDO carDO = new CarDO(
                 "12AXCD13",
                 6,
@@ -95,7 +93,6 @@ public class CarServiceIntegrationTest {
 
     @Test
     public void whenValidInput_ThenUpdateCar() throws Exception {
-
         CarDO carDO = createTestCar(
                 "12AXCD12",
                 5,
@@ -119,8 +116,7 @@ public class CarServiceIntegrationTest {
     }
 
     @Test
-    public void whenAlreadyExistLicensePlate_ThenUpdateCar_throwConstraintsViolationException() throws Exception {
-
+    public void whenAlreadyExistLicensePlate_ThenUpdateCar_throwConstraintsViolationException() {
         CarDO carDO1 = createTestCar(
                 "12AXCD12",
                 5,
@@ -150,8 +146,7 @@ public class CarServiceIntegrationTest {
     }
 
     @Test
-    public void findCarByInvalidCarId_throwConstraintsViolationException() throws Exception {
-
+    public void findCarByInvalidCarId_throwConstraintsViolationException() {
         CarDO carDO1 = createTestCar(
                 "12AXCD12",
                 5,
@@ -169,7 +164,6 @@ public class CarServiceIntegrationTest {
 
     @Test
     public void findCarByValidCarId() throws Exception {
-
         CarDO carDO = createTestCar(
                 "12AXCD12",
                 5,
@@ -187,8 +181,7 @@ public class CarServiceIntegrationTest {
     }
 
     @Test
-    public void findAllCars() throws Exception {
-
+    public void findAllCars() {
         CarDO carDO1 = createTestCar(
                 "12AXCD12",
                 5,
@@ -224,7 +217,6 @@ public class CarServiceIntegrationTest {
 
     @Test
     public void deleteCarByInvalidCarId_throwConstraintsViolationException() {
-
         CarDO carDO1 = createTestCar(
                 "12AXCD12",
                 5,
@@ -241,8 +233,7 @@ public class CarServiceIntegrationTest {
     }
 
     @Test
-    public void deleteCarByValidCarId() throws Exception{
-
+    public void deleteCarByValidCarId() throws Exception {
         CarDO carDO = createTestCar(
                 "54AFCD12",
                 5,
@@ -255,15 +246,13 @@ public class CarServiceIntegrationTest {
 
         carService.delete(carDO.getId());
 
-
         Assertions.assertThrows(EntityNotFoundException.class, () -> {
             carService.find(carDO.getId());
         });
     }
 
     @Test
-    public void deleteCarByValidCarId_throwConstraintsViolationException_whenDriverHasFKConstraint() throws Exception{
-
+    public void deleteCarByValidCarId_throwConstraintsViolationException_whenDriverHasFKConstraint() {
         CarDO carDO = createTestCar(
                 "54AFCD12",
                 5,
@@ -273,8 +262,10 @@ public class CarServiceIntegrationTest {
                 EngineType.ELECTRIC,
                 Manufacturer.MERCEDEZ_BENCZ
         );
+
         DriverDO driverDO = new DriverDO("driver01", "12345");
         driverDO.setCar(carDO);
+
         driverRepository.save(driverDO);
 
         Assertions.assertThrows(ConstraintsViolationException.class, () -> {

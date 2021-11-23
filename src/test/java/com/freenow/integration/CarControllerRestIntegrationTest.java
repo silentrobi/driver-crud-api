@@ -11,8 +11,6 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.runner.RunWith;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
@@ -53,27 +51,21 @@ public class CarControllerRestIntegrationTest {
 
     @Test
     public void whenInvalidInput_thenReturn400_forCreateCar() throws Exception {
-
         // Missing engine type
         String testCase1 = "{\"convertible\":true,\"licensePlate\":\"string\",\"manufacturer\":\"AUDI\",\"model\":\"string\",\"rating\":0,\"seatCount\":5}";
 
-        // @formatter:off
         mvc.perform(post(URL_PATH).contentType(MediaType.APPLICATION_JSON).content(testCase1))
                 .andExpect(status().isBadRequest());
-        // @formatter:on
 
         //// Missing licensePlate and manufacturer
         String testCase2 = "{\"convertible\":true,\"engineType\":\"DIESEL\",\"id\":0,\"model\":\"string\",\"rating\":0,\"seatCount\":0}";
 
-        // @formatter:off
         mvc.perform(post(URL_PATH).contentType(MediaType.APPLICATION_JSON).content(testCase2))
                 .andExpect(status().isBadRequest());
-        // @formatter:on
 
         //Invalid seatCount
         String testCase3 = "{\"convertible\":true,\"engineType\":\"DIESEL\",\"id\":0,\"licensePlate\":\"string\",\"manufacturer\":\"AUDI\",\"model\":\"string\",\"rating\":0,\"seatCount\":0}";
 
-        // @formatter:off
         mvc.perform(post(URL_PATH).contentType(MediaType.APPLICATION_JSON).content(testCase3))
                 .andExpect(status().isBadRequest());
     }
@@ -92,34 +84,26 @@ public class CarControllerRestIntegrationTest {
 
         String testCase = "{\"convertible\":true,\"engineType\":\"DIESEL\",\"licensePlate\":\"12AXCD12\",\"manufacturer\":\"AUDI\",\"model\":\"2019\",\"rating\":0,\"seatCount\":5}";
 
-        // @formatter:off
         mvc.perform(post(URL_PATH).contentType(MediaType.APPLICATION_JSON).content(testCase))
                 .andExpect(status().isBadRequest());
-        // @formatter:on
     }
 
     @Test
     public void whenValidInput_thenReturn201_forCreateCar() throws Exception {
-
         String testCase = "{\"convertible\":true,\"engineType\":\"DIESEL\",\"licensePlate\":\"12AXCD12\",\"manufacturer\":\"AUDI\",\"model\":\"2019\",\"rating\":0,\"seatCount\":5}";
 
-        // @formatter:off
         mvc.perform(post(URL_PATH).contentType(MediaType.APPLICATION_JSON).content(testCase))
                 .andExpect(status().isCreated())
                 .andExpect(jsonPath("$.licensePlate", is("12AXCD12")))
                 .andExpect(jsonPath("$.engineType", is("DIESEL")));
-        // @formatter:on
     }
 
     @Test
     public void whenMissingLicensePlateOrEngineType_thenReturn400_forUpdateCar() throws Exception {
-
         String testCase = "{\"rating\":9.4}";
 
-        // @formatter:off
         mvc.perform(put(URL_PATH + "/1").contentType(MediaType.APPLICATION_JSON).content(testCase))
                 .andExpect(status().isBadRequest());
-        // @formatter:on
     }
 
     @Test
@@ -146,10 +130,8 @@ public class CarControllerRestIntegrationTest {
 
         String testCase = "{\"engineType\":\"DIESEL\",\"licensePlate\":\"12AXCD13\",\"rating\":3.0}";
 
-        // @formatter:off
         mvc.perform(put(URL_PATH + "/" + carDO1.getId()).contentType(MediaType.APPLICATION_JSON).content(testCase))
                 .andExpect(status().isBadRequest());
-        // @formatter:on
     }
 
     @Test
@@ -157,23 +139,17 @@ public class CarControllerRestIntegrationTest {
         //Min rating check
         String testCase1 = "{\"engineType\":\"DIESEL\",\"licensePlate\":\"12AXCD12\",\"rating\":-1.3}";
 
-        // @formatter:off
         mvc.perform(put(URL_PATH + "/1").contentType(MediaType.APPLICATION_JSON).content(testCase1))
                 .andExpect(status().isBadRequest());
-        // @formatter:on
 
-        //Max rating check
         String testCase2 = "{\"engineType\":\"DIESEL\",\"licensePlate\":\"12AXCD12\",\"rating\":11.0}";
 
-        // @formatter:off
         mvc.perform(put(URL_PATH + "/1").contentType(MediaType.APPLICATION_JSON).content(testCase2))
                 .andExpect(status().isBadRequest());
-        // @formatter:on
     }
 
     @Test
     public void whenValidInput_thenReturn200_forUpdateCar() throws Exception {
-
         Iterable<CarDO> x = carRepository.findAll();
         CarDO carDO = createTestCar(
                 "15SRX45",
@@ -187,30 +163,22 @@ public class CarControllerRestIntegrationTest {
 
         String testCase = "{\"engineType\":\"GAS\",\"licensePlate\":\"15SRX45\",\"rating\":9.0}";
 
-        // @formatter:off
         mvc.perform(put(URL_PATH + "/" + carDO.getId()).contentType(MediaType.APPLICATION_JSON).content(testCase))
                 .andExpect(status().isOk());
-        // @formatter:on
     }
 
     @Test
     public void whenInvalidCarId_thenReturn404_forUpdateCar() throws Exception {
-
         String testCase = "{\"engineType\":\"GAS\",\"licensePlate\":\"13AXCD12\",\"rating\":9.0}";
 
-        // @formatter:off
         mvc.perform(put(URL_PATH + "/20").contentType(MediaType.APPLICATION_JSON).content(testCase))
                 .andExpect(status().isNotFound());
-        // @formatter:on
     }
 
     @Test
     public void whenInvalidCarId_thenReturn404_forDeleteCar() throws Exception {
-
-        // @formatter:off
         mvc.perform(delete(URL_PATH + "/20"))
                 .andExpect(status().isNotFound());
-        // @formatter:on
     }
 
     @Test
@@ -225,10 +193,8 @@ public class CarControllerRestIntegrationTest {
                 Manufacturer.FORD
         );
 
-        // @formatter:off
         mvc.perform(delete(URL_PATH + "/" + carDO.getId()))
                 .andExpect(status().isOk());
-        // @formatter:on
     }
 
     @Test
@@ -252,22 +218,17 @@ public class CarControllerRestIntegrationTest {
                 Manufacturer.FORD
         );
 
-        // @formatter:off
         mvc.perform(get(URL_PATH + "/"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(lessThanOrEqualTo(2))))
                 .andExpect(jsonPath("$[0].id", is(carDO1.getId().intValue())))
                 .andExpect(jsonPath("$[1].id", is(carDO2.getId().intValue())));
-        // @formatter:on
     }
 
     @Test
     public void whenInvalidCarId_thenReturn404_forGetCar() throws Exception {
-
-        // @formatter:off
         mvc.perform(get(URL_PATH + "/12"))
                 .andExpect(status().isNotFound());
-        // @formatter:on
     }
 
     @Test
@@ -281,10 +242,9 @@ public class CarControllerRestIntegrationTest {
                 EngineType.DIESEL,
                 Manufacturer.FORD
         );
-        // @formatter:off
+
         mvc.perform(get(URL_PATH + "/" + carDO.getId()))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id", is(carDO.getId().intValue())));
-        // @formatter:on
     }
 }
