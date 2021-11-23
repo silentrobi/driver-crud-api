@@ -5,6 +5,7 @@ import com.freenow.dataaccessobject.CarRepository;
 import com.freenow.dataaccessobject.DriverRepository;
 import com.freenow.datatransferobject.UpdateCarDTO;
 import com.freenow.domainobject.CarDO;
+import com.freenow.domainobject.DriverDO;
 import com.freenow.domainvalue.EngineType;
 import com.freenow.domainvalue.Manufacturer;
 import com.freenow.exception.ConstraintsViolationException;
@@ -240,7 +241,7 @@ public class CarServiceIntegrationTest {
     }
 
     @Test
-    public void deleteCarByValidCarId_throwConstraintsViolationException() throws Exception{
+    public void deleteCarByValidCarId() throws Exception{
 
         CarDO carDO = createTestCar(
                 "54AFCD12",
@@ -259,4 +260,26 @@ public class CarServiceIntegrationTest {
             carService.find(carDO.getId());
         });
     }
+
+    @Test
+    public void deleteCarByValidCarId_throwConstraintsViolationException_whenDriverHasFKConstraint() throws Exception{
+
+        CarDO carDO = createTestCar(
+                "54AFCD12",
+                5,
+                false,
+                "2011",
+                0.0,
+                EngineType.ELECTRIC,
+                Manufacturer.MERCEDEZ_BENCZ
+        );
+        DriverDO driverDO = new DriverDO("driver01", "12345");
+        driverDO.setCar(carDO);
+        driverRepository.save(driverDO);
+
+        Assertions.assertThrows(ConstraintsViolationException.class, () -> {
+            carService.delete(carDO.getId());
+        });
+    }
 }
+

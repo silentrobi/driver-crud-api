@@ -62,7 +62,7 @@ public class CarController {
     }
 
     @DeleteMapping("/{carId}")
-    public void deleteCar(@PathVariable long carId) throws EntityNotFoundException
+    public void deleteCar(@PathVariable long carId) throws ConstraintsViolationException, EntityNotFoundException
     {
         carService.delete(carId);
     }

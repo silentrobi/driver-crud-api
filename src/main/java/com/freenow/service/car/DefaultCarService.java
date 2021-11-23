@@ -105,10 +105,15 @@ public class DefaultCarService implements CarService {
      * @throws EntityNotFoundException if no car with the given id was found.
      */
     @Override
-    @Transactional
-    public void delete(Long carId) throws EntityNotFoundException {
+    public void delete(Long carId) throws ConstraintsViolationException, EntityNotFoundException {
         CarDO carDO = findCarChecked(carId);
-        carRepository.delete(carDO);
+        try {
+            carRepository.delete(carDO);
+        } catch (DataIntegrityViolationException e) {
+            LOG.warn("ConstraintsViolationException while deleting a car: {}", carDO, e);
+            throw new ConstraintsViolationException(e.getMessage());
+        }
+
     }
 
     private CarDO findCarChecked(Long carId) throws EntityNotFoundException {

@@ -6,6 +6,7 @@ import com.freenow.domainobject.CarDO;
 import com.freenow.exception.ConstraintsViolationException;
 import com.freenow.exception.EntityNotFoundException;
 
+import javax.validation.ConstraintViolationException;
 import java.util.List;
 
 public interface CarService {
@@ -18,5 +19,5 @@ public interface CarService {
 
     void update(Long carId, UpdateCarDTO updateCarDTO) throws ConstraintsViolationException, EntityNotFoundException;
 
-    void delete(Long carId) throws EntityNotFoundException;
+    void delete(Long carId) throws EntityNotFoundException, ConstraintsViolationException;
 }
