@@ -18,7 +18,7 @@ public class CustomUserDetailService implements UserDetailsService {
      * load user by username.
      *
      * @param username
-     * @throws UsernameNotFoundException  if no driver with the given id was found.
+     * @throws UsernameNotFoundException  if no username was found.
      */
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
