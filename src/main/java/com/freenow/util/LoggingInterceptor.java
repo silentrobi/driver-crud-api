@@ -17,7 +17,7 @@ public class LoggingInterceptor implements AsyncHandlerInterceptor {
         logMessage.append("uri: ").append(request.getRequestURI()).append("\t");
         logMessage.append("status: ").append(response.getStatus()).append("\t");
         logMessage.append("remoteAddress: ").append(request.getRemoteAddr()).append("\t");
-
+         
         if (ex != null) {
             LoggingInterceptor.LOG.error(logMessage.toString(), ex);
         } else {
